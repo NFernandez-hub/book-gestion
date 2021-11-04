@@ -1,0 +1,46 @@
+<h1> Sub-categoria <small></small></h1>
+
+<div fxLayout="row"
+     class="animate__animated animate__fadeIn"
+     fxLayout.xs="column">
+
+    <mat-card fxLayout="row" 
+                fxLayoutGap="40px"
+                class="animate__animated animate__fadeIn"
+                fxLayout.xs="column"
+                fxFlex="50">
+        <div fxFlex="100" fxLayout="column">
+       
+            <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input matInput
+                        (input)="inputValidator($event)"
+                        type="text"
+                        [(ngModel)]="subCategoria.nombre"
+                        required>
+            </mat-form-field>
+    
+            <mat-form-field>
+                <mat-label>Categoria</mat-label>
+                <mat-select [(ngModel)]="subCategoria.categoria._id"
+                            required>
+                    <mat-option *ngFor="let categoria of categorias"
+                                [value]="categoria._id">
+                                {{categoria.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+            <br>
+    
+            <button mat-raised-button 
+                    color="primary"
+                    (click)="guardar()">
+                <mat-icon>edit</mat-icon>
+                Guardar
+            </button>
+    
+        </div>
+    </mat-card>
+</div>
+

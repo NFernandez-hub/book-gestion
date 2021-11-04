@@ -1,0 +1,71 @@
+<h1> Evento </h1>
+
+<div fxLayout="row"
+  fxLayoutGap="40px"
+  class="animate__animated animate__fadeIn"
+  fxLayout.xs="column">
+     
+  <mat-card fxLayout="row" 
+    fxLayoutGap="40px"
+    class="animate__animated animate__fadeIn"
+    fxFlex="50">
+     
+    <div fxLayout="column" fxFlex="100%">
+       
+      <mat-form-field>
+          <mat-label>Nombre</mat-label>
+          <input matInput
+                 type="text"
+                 [(ngModel)]="evento.nombre"
+                 required>
+      </mat-form-field>
+      <mat-form-field>
+          <mat-label>Descripcion</mat-label>
+          <textarea matInput
+                    maxlength="300"
+                    style="height: 200px;"
+                    type="text"
+                    [(ngModel)]="evento.descripcion"
+                    required></textarea>
+      </mat-form-field>
+      <mat-form-field>
+          <mat-label>Lugar</mat-label>
+          <input matInput
+                 type="text"
+                 [(ngModel)]="evento.lugar"
+                 required>
+      </mat-form-field>
+      <br>
+      <button mat-raised-button 
+              color="primary"
+              (click)="guardar()">
+          <mat-icon>edit</mat-icon>
+          Guardar
+      </button>
+
+    </div>
+         
+  </mat-card>
+     
+  <div fxFlex="50">
+    <mat-card class="example-card animate__animated animate__fadeIn">
+      <mat-card-header>
+        <mat-card-title>Imagen del Evento</mat-card-title>
+      </mat-card-header>
+
+      <img *ngIf="!imgTemp" mat-card-image [src]="evento.img" class="animate__animated animate__fadeIn">
+      <img *ngIf="imgTemp" mat-card-image [src]="imgTemp" class="animate__animated animate__fadeIn">
+      
+      <mat-card-actions>
+        <button mat-raised-button color="primary"
+                [disabled]="!imagenSubir"
+                (click)="subirImagen()"
+                style="margin-left: 10px; margin-bottom: 10px;"
+                routerLink="/gestion/evento"
+                >Subir Foto</button>
+        <input type="file" style="margin-left: 20px;" 
+               (change)="cambiarImagen($event)">
+      </mat-card-actions> 
+    </mat-card>
+  </div>
+</div>

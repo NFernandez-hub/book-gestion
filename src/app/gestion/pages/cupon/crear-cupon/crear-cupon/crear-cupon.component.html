@@ -1,0 +1,71 @@
+<h1> Cupon <small></small></h1>
+
+<div fxLayout="row"
+     class="animate__animated animate__fadeIn"
+     fxLayout.xs="column">
+
+    <mat-card fxLayout="row" 
+                fxLayoutGap="40px"
+                class="animate__animated animate__fadeIn"
+                fxLayout.xs="column"
+                fxFlex="50">
+        <div fxFlex="100" fxLayout="column">
+
+            <mat-form-field>
+                <mat-label>Tipo</mat-label>
+                <mat-select [(ngModel)]="cupon.tipo"
+                            required>
+                    <mat-option *ngFor="let tipo of Tipos"
+                                (click)="saveTipe(tipo.desc)"
+                                [value]="tipo.id">
+                                {{tipo.desc}}
+                    </mat-option>
+              </mat-select>
+            </mat-form-field>
+       
+            <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input matInput
+                        type="text"
+                        [(ngModel)]="cupon.nombre"
+                        required>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="tipoCuponTemp === 'VOUCHER'">
+                <mat-label>usos</mat-label>
+                <input matInput
+                        type="number"
+                        [(ngModel)]="cupon.usos"
+                        required>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="tipoCuponTemp === 'GIFT_CARD'">
+                <mat-label>valor</mat-label>
+                <input matInput
+                        type="number"
+                        [(ngModel)]="cupon.valor"
+                        required>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="tipoCuponTemp === 'VOUCHER'">
+                <mat-label>porcentaje</mat-label>
+                <input matInput
+                        type="porcentaje"
+                        [(ngModel)]="cupon.porcentaje"
+                        required>
+            </mat-form-field>
+    
+            <br>
+    
+            <button mat-raised-button 
+                    color="primary"
+                    (click)="guardar()">
+                <mat-icon>edit</mat-icon>
+                Guardar
+            </button>
+    
+        </div>
+    </mat-card>
+</div>
+
+

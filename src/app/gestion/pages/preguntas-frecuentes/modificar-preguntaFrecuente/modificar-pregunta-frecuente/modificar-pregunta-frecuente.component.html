@@ -1,0 +1,45 @@
+<h1> Usuario <small></small></h1>
+
+<div fxLayout="row"
+    class="animate__animated animate__fadeIn"
+    fxLayout.xs="column">
+
+    <mat-card fxLayout="row" 
+          fxLayoutGap="40px"
+          class="animate__animated animate__fadeIn"
+          fxLayout.xs="column"
+            fxFlex="50">
+
+        <div fxLayout="column" fxFlex="100%">
+       
+            <mat-form-field>
+                <mat-label>Pregunta</mat-label>
+                <textarea matInput
+                        style="height: 50px;"
+                        type="text"
+                        [(ngModel)]="preguntaFrecuente.pregunta"
+                        required></textarea>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Respuesta</mat-label>
+                <textarea matInput
+                        maxlength="300"
+                        style="height: 200px;"
+                        type="text"
+                        [(ngModel)]="preguntaFrecuente.respuesta"
+                        required></textarea>
+            </mat-form-field>
+
+        <br>
+
+        <button mat-raised-button 
+                color="primary"
+                (click)="guardar()">
+            <mat-icon>edit</mat-icon>
+            Guardar
+        </button>
+        </div>
+    </mat-card>
+
+</div>

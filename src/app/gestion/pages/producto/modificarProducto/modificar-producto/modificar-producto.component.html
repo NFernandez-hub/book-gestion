@@ -1,0 +1,143 @@
+
+<h1> Producto <small></small></h1>
+
+<div fxLayout="row"
+     fxLayoutGap="40px"
+     class="animate__animated animate__fadeIn"
+     fxLayout.xs="column">
+     
+    <mat-card fxLayout="row" 
+          fxLayoutGap="40px"
+          class="animate__animated animate__fadeIn"
+          fxFlex="50">
+     
+         <div fxLayout="column" fxFlex="100%">
+            
+             <mat-form-field>
+                 <mat-label>Titulo</mat-label>
+                 <input matInput
+                         type="text"
+                         [(ngModel)]="producto.titulo"
+                         required>
+             </mat-form-field>
+             <mat-form-field>
+                 <mat-label>Descripcion</mat-label>
+                 <input matInput
+                         type="text"
+                         [(ngModel)]="producto.descripcion"
+                         required>
+             </mat-form-field>
+             <mat-form-field>
+                 <mat-label>precio</mat-label>
+                 <input matInput
+                         type="number"
+                         [(ngModel)]="producto.precio"
+                         required>
+             </mat-form-field>
+             <mat-form-field>
+                 <mat-label>isbn</mat-label>
+                 <input matInput
+                         type="number"
+                         [(ngModel)]="producto.isbn"
+                         required>
+             </mat-form-field>
+             <mat-form-field>
+                 <mat-label>formato</mat-label>
+                 <input matInput
+                         (input)="inputValidator($event)"
+                         type="text"
+                         [(ngModel)]="producto.formato"
+                         required>
+             </mat-form-field>
+     
+             <mat-form-field>
+                 <mat-label>subCategoria</mat-label>
+                 <mat-select [(ngModel)]="producto.subCategoria._id"
+                             required>
+                     <mat-option *ngFor="let subCategoria of subCategorias"
+                                 [value]="subCategoria._id">
+                                 {{subCategoria.nombre}}
+                     </mat-option>
+                 </mat-select>
+             </mat-form-field>
+             <mat-form-field>
+                 <mat-label>Autor</mat-label>
+                 <mat-select [(ngModel)]="producto.autor._id"
+                             required>
+                     <mat-option *ngFor="let autor of autores"
+                                 [value]="autor._id">
+                                 {{autor.nombre}}
+                     </mat-option>
+                 </mat-select>
+             </mat-form-field>
+             <mat-form-field>
+                 <mat-label>Editorial</mat-label>
+                 <mat-select [(ngModel)]="producto.editorial._id"
+                             required>
+                     <mat-option *ngFor="let editorial of editoriales"
+                                 [value]="editorial._id">
+                                 {{editorial.nombre}}
+                     </mat-option>
+                 </mat-select>
+             </mat-form-field>
+     
+             <mat-form-field>
+                 <mat-label>Idioma</mat-label>
+                 <input matInput
+                         (input)="inputValidator($event)"
+                         type="text"
+                         [(ngModel)]="producto.idioma"
+                         required>
+             </mat-form-field>
+             <mat-form-field>
+                 <mat-label>Edicion</mat-label>
+                 <input matInput
+                         type="text"
+                         [(ngModel)]="producto.edicion"
+                         required>
+             </mat-form-field>
+             <mat-form-field>
+                 <mat-label>Stock</mat-label>
+                 <input matInput
+                         type="number"
+                         [(ngModel)]="producto.stock"
+                         required>
+             </mat-form-field>
+     
+             <br>
+     
+             <button mat-raised-button 
+                     color="primary"
+                     (click)="guardar()">
+                 <mat-icon>edit</mat-icon>
+                 Guardar
+             </button>
+     
+         </div>
+         
+    </mat-card>
+     
+    <div fxFlex="50">
+        <mat-card class="example-card animate__animated animate__fadeIn">
+            <mat-card-header>
+              <mat-card-title>Imagen del Producto</mat-card-title>
+            </mat-card-header>
+            <img *ngIf="!imgTemp" mat-card-image [src]="producto.img" class="animate__animated animate__fadeIn">
+            <img *ngIf="imgTemp" mat-card-image [src]="imgTemp" class="animate__animated animate__fadeIn">
+            
+            <mat-card-actions>
+              <button mat-raised-button color="primary"
+                        [disabled]="!imagenSubir"
+                       (click)="subirImagen()"
+                       style="margin-left: 10px; margin-bottom: 10px;"
+                       routerLink="/gestion/producto"
+                       >Subir Foto</button>
+              <input type="file" style="margin-left: 10px;"  
+                     (change)="cambiarImagen($event)">
+            </mat-card-actions> 
+        </mat-card>
+    </div>
+</div>
+
+
+

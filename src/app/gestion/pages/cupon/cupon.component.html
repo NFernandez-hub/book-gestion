@@ -1,0 +1,89 @@
+<!-- <div fxLayout="row" fxLayoutGap="10px" style="margin: 5px;"> -->
+
+    <!-- <mat-form-field appearance="fill" fxFlex="50">
+      <mat-label>Buscar</mat-label>
+      <input type="text"
+             placeholder="seleccione un prodcuto"
+             aria-label="Buscar Productos"
+             matInput
+             [(ngModel)]="termino"
+             required>
+    </mat-form-field>
+  
+    <button mat-raised-button 
+            style="max-height: 50px;"
+            color="primary"
+            (click)="buscando()">
+      <mat-icon>search</mat-icon>
+    </button> -->
+  
+  <div>
+    <h2 style="margin: 5px">Cupones</h2>
+  </div>
+  
+    <div class="example-container mat-elevation-z8" style="margin: 5px;">
+      <table mat-table [dataSource]="cupones" class="mat-lifting-z8 demo-table animate__animated animate__fadeIn">
+      
+          <ng-container matColumnDef="nombre" class="animate__animated animate__fadeIn">
+            <th mat-header-cell *matHeaderCellDef> NOMBRE </th>
+            <td mat-cell *matCellDef="let cupon"> {{cupon.nombre | titlecase}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="codigo" class="animate__animated animate__fadeIn">
+            <th mat-header-cell *matHeaderCellDef> CODIGO </th>
+            <td mat-cell *matCellDef="let cupon"> {{cupon.codigo}} </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="usos" class="animate__animated animate__fadeIn">
+            <th mat-header-cell *matHeaderCellDef> USOS </th>
+            <td mat-cell *matCellDef="let cupon"> {{cupon.usos}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="valor" class="animate__animated animate__fadeIn">
+            <th mat-header-cell *matHeaderCellDef> VALOR </th>
+            <td mat-cell *matCellDef="let cupon"> {{cupon.valor}}$ </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="porcentaje" class="animate__animated animate__fadeIn">
+            <th mat-header-cell *matHeaderCellDef> PORCENTAJE </th>
+            <td mat-cell *matCellDef="let cupon"> {{cupon.porcentaje}}% </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="tipo" class="animate__animated animate__fadeIn">
+            <th mat-header-cell *matHeaderCellDef> TIPO </th>
+            <td mat-cell *matCellDef="let cupon"> {{cupon.tipo}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="botones" class="animate__animated animate__fadeIn">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let cupon">
+              <a mat-raised-button class="buttonLeft"
+                 (click)="modificarNav(cupon)"
+                 color="primary"><mat-icon>edit</mat-icon>
+              </a>
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="botones2" class="animate__animated animate__fadeIn">
+            <th mat-header-cell *matHeaderCellDef style="padding-left: 5px;">
+              <button mat-raised-button
+                  routerLink="/gestion/cupon/agregar"
+                 color="primary"><mat-icon>add</mat-icon>
+            </button>
+            </th>
+            <span></span>
+            <td mat-cell *matCellDef="let usuario" class="animate__animated animate__fadeIn" style="padding-left: 5px;">
+              <a mat-raised-button
+                 (click)="eliminarCupon(usuario)"
+                 color="warn"><mat-icon>cancel</mat-icon>
+              </a>
+            </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+  
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+        </table>
+</div>
+  

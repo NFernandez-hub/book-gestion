@@ -1,0 +1,45 @@
+
+<mat-card style="top: 30%; left:30%; width: 400px;">
+    <mat-card-title>
+        Login
+    </mat-card-title>
+
+    <mat-card-content>
+        <form autocomplete="off"
+              [formGroup]="miFormulario"
+              (ngSubmit)="login()">
+             
+             <hr>
+
+            <div class="wrap-input100 m-b-23">
+                <span class="label-input100">Email</span>
+                <input class="input100"
+                       type="email" 
+                       formControlName="email"
+                       placeholder="Ingrese su email">
+                <span class="focus-input100"></span>
+            </div>
+        
+            <div class="wrap-input100">
+                <span class="label-input100">Password</span>
+                <input class="input100"
+                       type="password"
+                       formControlName="password" 
+                       placeholder="Ingrese su contraseña">
+                <span class="focus-input100"></span>
+            </div>
+
+            <div class="container-login100-form-btn">
+                <div class="wrap-login100-form-btn">
+                    <div class="login100-form-bgbtn"></div>
+                    <button mat-button
+                            type="submit"
+                            [disabled]="miFormulario.invalid">
+                        Login
+                    </button>
+                </div>
+            </div>
+    
+        </form>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,54 @@
+
+<h1> Evento <small></small></h1>
+
+<div fxLayout="row"
+     class="animate__animated animate__fadeIn"
+     fxLayout.xs="column">
+     
+    <mat-card fxLayout="row" 
+          fxLayoutGap="40px"
+          class="animate__animated animate__fadeIn"
+          fxLayout.xs="column"
+            fxFlex="50">
+     
+         <div fxLayout="column" fxFlex="100%">
+            
+             <mat-form-field>
+                 <mat-label>Nombre</mat-label>
+                 <input matInput
+                         type="text"
+                         [(ngModel)]="evento.nombre"
+                         required>
+             </mat-form-field>
+             <mat-form-field>
+                 <mat-label>Descripcion</mat-label>
+                 <input matInput
+                         type="text"
+                         [(ngModel)]="evento.descripcion"
+                         required>
+             </mat-form-field>
+             <mat-form-field>
+                 <mat-label>Lugar</mat-label>
+                 <input matInput
+                         type="text"
+                         [(ngModel)]="evento.lugar"
+                         required>
+             </mat-form-field>
+     
+             <br>
+     
+             <button mat-raised-button 
+                     color="primary"
+                     (click)="guardar()">
+                 <mat-icon>edit</mat-icon>
+                 Guardar
+             </button>
+     
+         </div>
+         
+    </mat-card>
+     
+</div>
+
+
+

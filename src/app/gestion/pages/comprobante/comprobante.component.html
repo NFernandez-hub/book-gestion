@@ -1,0 +1,39 @@
+<div>
+  <h2 style="margin: 5px">Comprobantes</h2>
+</div>
+
+<div class="example-container mat-elevation-z8" style="margin: 5px;" fxLayoutGap="40px">
+  <table mat-table [dataSource]="comprobantes" class="mat-lifting-z8 demo-table animate__animated animate__fadeIn">
+    
+    <ng-container matColumnDef="numero" class="animate__animated animate__fadeIn">
+      <th mat-header-cell *matHeaderCellDef> N° </th>
+      <mat-spinner></mat-spinner>
+      <td mat-cell *matCellDef="let comprobante"> {{comprobante.numero}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha" class="animate__animated animate__fadeIn">
+      <th mat-header-cell *matHeaderCellDef> FECHA </th>
+      <td mat-cell *matCellDef="let comprobante"> {{comprobante.fecha | date:"medium"}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="monto" class="animate__animated animate__fadeIn">
+      <th mat-header-cell *matHeaderCellDef> TOTAL </th>
+      <td mat-cell *matCellDef="let comprobante"> {{comprobante.total}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="botones" class="animate__animated animate__fadeIn">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let comprobante" style="padding-right: 1px; padding-left: 25px;">
+          <a mat-raised-button class="buttonLeft"
+             (click)="verNav(comprobante)"
+             color="primary"><mat-icon>search</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+</div>

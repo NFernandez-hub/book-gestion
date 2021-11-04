@@ -1,0 +1,135 @@
+<div class="example-container">
+
+
+    <mat-toolbar color="primary">
+
+        <button mat-button (click)="sidenav.toggle()" fxHide.xs>
+            Menu<mat-icon style="margin-left: 5px;">menu</mat-icon>
+        </button>
+
+        <button mat-button [matMenuTriggerFor]="menu" fxHide.xl>
+            <mat-icon style="margin-right: 10px;">account_circle</mat-icon>
+        </button>
+
+        <span class="spacer"></span>
+
+        <h1>TU HERMANA</h1>
+
+        <span class="spacer"></span>
+
+        <button mat-button [matMenuTriggerFor]="menu" fxHide.xs>{{usuario.nombre}}
+            <mat-icon style="margin-left: 10px;">account_circle</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="logout()" routerLink="/auth/login">
+                <mat-icon>logout</mat-icon>
+                Logout
+            </button>
+        </mat-menu>
+
+        <button mat-button (click)="sidenavMovile.toggle()" fxHide.xl>
+            <mat-icon style="margin-left: 5px;">menu</mat-icon>
+        </button>
+
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-sidenav-container">
+        <mat-sidenav #sidenavMovile mode="over" position="end" fxHide.xl>
+            <mat-nav-list>
+                <a routerLink="./autor" mat-list-item (click)="sidenavMovile.toggle()">
+                    <span>Autores</span>
+                </a>
+                <hr>
+                <a routerLink="./categoria" mat-list-item (click)="sidenavMovile.toggle()">
+                    <span>Categorias</span>
+                </a>
+                <hr>
+                <a routerLink="./comprobante" mat-list-item (click)="sidenavMovile.toggle()">
+                    <span>Comprobantes</span>
+                </a>
+                <hr>
+                <a routerLink="./cupon" mat-list-item (click)="sidenavMovile.toggle()">
+                    <span>Cupon</span>
+                </a>
+                <hr>
+                <a routerLink="./editorial" mat-list-item (click)="sidenavMovile.toggle()">
+                    <span>Editoriales</span>
+                </a>
+                <hr>
+                <a routerLink="./evento" mat-list-item (click)="sidenavMovile.toggle()">
+                    <span>Eventos</span>
+                </a>
+                <hr>
+                <a routerLink="./preguntasFrecuentes" mat-list-item (click)="sidenavMovile.toggle()">
+                    <span>Preguntas frecuentes</span>
+                </a>
+                <hr>
+                <a routerLink="./producto" mat-list-item (click)="sidenavMovile.toggle()">
+                    <span>Productos</span>
+                </a>
+                <hr>
+                <a routerLink="./subCategoria" mat-list-item (click)="sidenavMovile.toggle()">
+                    <span>Sub-Categorias</span>
+                </a>
+                <hr>
+                <a routerLink="./usuario" mat-list-item (click)="sidenavMovile.toggle()">
+                    <span>Usuarios</span>
+                </a>
+                <hr>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav #sidenav mode="side" opened fxHide.xs>
+            <mat-nav-list>
+                <a routerLink="./autor" mat-list-item>
+                    <span>Autores</span>
+                </a>
+                <hr>
+                <a routerLink="./categoria" mat-list-item>
+                    <span>Categorias</span>
+                </a>
+                <hr>
+                <a routerLink="./comprobante" mat-list-item>
+                    <span>Comprobantes</span>
+                </a>
+                <hr>
+                <a routerLink="./cupon" mat-list-item>
+                    <span>Cupon</span>
+                </a>
+                <hr>
+                <a routerLink="./editorial" mat-list-item>
+                    <span>Editoriales</span>
+                </a>
+                <hr>
+                <a routerLink="./evento" mat-list-item>
+                    <span>Eventos</span>
+                </a>
+                <hr>
+                <a routerLink="./preguntasFrecuentes" mat-list-item>
+                    <span>Preguntas frecuentes</span>
+                </a>
+                <hr>
+                <a routerLink="./producto" mat-list-item >
+                    <span>Productos</span>
+                </a>
+                <hr>
+                <a routerLink="./subCategoria" mat-list-item>
+                    <span>Sub-Categorias</span>
+                </a>
+                <hr>
+                <a routerLink="./usuario" mat-list-item>
+                    <span>Usuarios</span>
+                </a>
+                <hr>
+            </mat-nav-list>
+        </mat-sidenav>
+        
+        <div class="container">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-container>
+
+    
+
+</div>

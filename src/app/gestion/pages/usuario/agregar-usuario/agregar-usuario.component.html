@@ -1,0 +1,64 @@
+<h1> Usuario <small></small></h1>
+
+<div fxLayout="row"
+    class="animate__animated animate__fadeIn"
+    fxLayout.xs="column">
+
+    <mat-card fxLayout="row" 
+          fxLayoutGap="40px"
+          class="animate__animated animate__fadeIn"
+          fxLayout.xs="column"
+            fxFlex="50">
+
+        <div fxLayout="column" fxFlex="100%">
+       
+            <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input matInput
+                        (input)="inputValidator($event)"
+                        type="text"
+                        [(ngModel)]="usuario.nombre"
+                        required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput
+                        type="email"
+                        [(ngModel)]="usuario.email"
+                        required>
+            </mat-form-field>            
+        
+        
+            <mat-form-field >
+                <mat-label>Contraseña</mat-label>
+                <input matInput
+                        type="password"
+                        [(ngModel)]="usuario.password"
+                        required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Rol</mat-label>
+                <mat-select [(ngModel)]="usuario.rol"
+                            required>
+                    <mat-option *ngFor="let role of Roles"
+                                [value]="role.id">
+                                {{role.desc}}
+                    </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+        <br>
+
+        <button mat-raised-button 
+                color="primary"
+                (click)="guardar()">
+            <mat-icon>edit</mat-icon>
+            Guardar
+        </button>
+
+    </div>
+</mat-card>
+
+</div>
