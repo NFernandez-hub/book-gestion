@@ -25,7 +25,7 @@ export class CuponComponent implements OnInit {
 
   cargando = true;
 
-  displayedColumns: string[] = ['nombre', 'codigo', 'usos', 'valor', 'porcentaje', 'tipo', 'botones', 'botones2'];
+  displayedColumns: string[] = ['nombre', 'codigo', 'usos', 'valor', 'porcentaje', 'tipo', 'botones2'];
 
   constructor(private cuponService: CuponService,
     private router: Router) { }

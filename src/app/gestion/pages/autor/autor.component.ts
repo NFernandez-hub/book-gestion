@@ -69,15 +69,28 @@ export class AutorComponent implements OnInit {
   }
 
   async nuevoSweetAlert() {
+    const pattern = /^[a-zA-Z]*$/; 
+
     const { value } = await Swal.fire<string>({
       title: 'Crear Autor',
       text: 'Ingrese el nombre del nuevo autor',
       input: 'text',
       inputPlaceholder: 'Nombre del Autor',
       showCancelButton: true,
+      inputValidator: (value) => {
+        return new Promise((resolve) => {
+          if (pattern.test(value)) {
+            resolve('')
+          } else {
+            resolve(`El nombre de el Autor no puede contener numeros: ${value}`)
+          }
+        })
+      }
     })
 
-    if (value!.trim().length > 0) {
+    if (!value) {
+      return
+    } else if (value!.trim().length > 0) {
       this.autorService.nuevoAutor(value!)
         .subscribe(ok => {
           console.log(ok);
@@ -98,6 +111,7 @@ export class AutorComponent implements OnInit {
   }
 
   async modificarSweetAlert(id: string, nombre: string) {
+    const pattern = /^[a-zA-Z]*$/; 
 
     const { value } = await Swal.fire<string>({
       title: 'Modificar Autor',
@@ -105,9 +119,20 @@ export class AutorComponent implements OnInit {
       input: 'text',
       inputPlaceholder: `${nombre}`,
       showCancelButton: true,
+      inputValidator: (value) => {
+        return new Promise((resolve) => {
+          if (pattern.test(value)) {
+            resolve('')
+          } else {
+            resolve(`El nombre de el Autor no puede contener numeros: ${value}`)
+          }
+        })
+      }
     })
 
-    if (value!.trim().length > 0) {
+    if (!value) {
+      return
+    } else if (value!.trim().length > 0) {
       this.autorService.actualizarAutor(id, value!)
         .subscribe((ok) => {
           console.log(ok);

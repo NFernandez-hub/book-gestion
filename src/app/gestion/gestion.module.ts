@@ -11,7 +11,7 @@ import { AutorComponent } from './pages/autor/autor.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MaterialModule } from '../material/material.module';
 import { AgregarUsuarioComponent } from './pages/usuario/agregar-usuario/agregar-usuario.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubCategoriaComponent } from './pages/sub-categoria/sub-categoria.component';
 import { CrearSubCategoriaComponent } from './pages/sub-categoria/crear-sub-categoria/crear-sub-categoria.component';
 import { CrearProductoComponent } from './pages/producto/crearProducto/crear-producto/crear-producto.component';
@@ -58,6 +58,7 @@ import { CrearCuponComponent } from './pages/cupon/crear-cupon/crear-cupon/crear
     FlexLayoutModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     GestionRoutingModule,
   ]
 })

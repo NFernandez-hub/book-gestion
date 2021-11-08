@@ -40,7 +40,7 @@ export class LoginComponent {
       .subscribe(ok => {
 
         if (ok === true) {
-          this.router.navigateByUrl('/gestion');
+          this.router.navigateByUrl('/gestion/autor');
         } else {
           Swal.fire('Error', ok, 'error')
         }

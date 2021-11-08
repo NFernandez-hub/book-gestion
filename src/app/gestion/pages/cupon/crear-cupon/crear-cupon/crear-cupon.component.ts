@@ -32,8 +32,8 @@ export class CrearCuponComponent implements OnInit {
     nombre: '',
     codigo: '',
     usos: 1,
-    valor: 0,
-    porcentaje: 0,
+    valor: undefined,
+    porcentaje: undefined,
     tipo: TipoCupon.GIFT_CARD,
   }
 
@@ -41,20 +41,13 @@ export class CrearCuponComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router) { }
 
-  ngOnInit(): void {
-
-    // this.activatedRoute.params
-    //   .pipe(
-    //     switchMap(({ id }) => this.cuponService.getCuponesPorId(id))
-    //   )
-    //   .subscribe(cupon => this.cupon = cupon)
+  ngOnInit(): void {  
+    
   }
 
   guardar() {
-
     if (this.cupon.nombre!.trim().length === 0) {
       Swal.fire('Error', 'Campos obligatorios vacios', 'error')
-
     } else {
       this.cuponService.nuevoCupon(this.cupon)
         .subscribe(ok => {
@@ -62,7 +55,7 @@ export class CrearCuponComponent implements OnInit {
             Swal.fire('Cupon agregado correctamente', this.cupon.nombre, 'success')
             this.router.navigate(['/gestion/cupon'])
           } else {
-            Swal.fire('Error', `El cupon ${this.cupon.nombre} ya se encuentra registrada`, 'error')
+            Swal.fire('Error', ok, 'error')
           }
         })
     }

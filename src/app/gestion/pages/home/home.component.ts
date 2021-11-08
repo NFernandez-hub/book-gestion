@@ -1,5 +1,4 @@
-import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
@@ -7,7 +6,7 @@ import { AuthService } from '../../../auth/services/auth.service';
   templateUrl: './home.component.html',
   styles: [`
     hr{
-      border-color: #9400d3;
+      border-color: black;
       border-top: 1px
     }
     .container {
@@ -28,7 +27,16 @@ import { AuthService } from '../../../auth/services/auth.service';
     }
     .example-sidenav-container {
       flex: 1;
-}
+    }
+    .logo-container {
+        height: 100%;
+        width: 200px;
+        display: inline-block;
+        font-weight: 600;
+        text-align: left;
+        align-self: center;
+
+    }
   `]
 })
 export class HomeComponent implements OnInit {

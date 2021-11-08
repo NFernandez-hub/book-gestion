@@ -49,6 +49,47 @@
               </mat-select>
             </mat-form-field>
 
+            <mat-form-field>
+                <mat-label>Provincia</mat-label>
+                <mat-select [(ngModel)]="usuario.provincia"
+                            required>
+                    <mat-option *ngFor="let provincia of provincias"
+                                [value]="provincia.provincia">
+                                {{provincia.provincia}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Localidad</mat-label>
+                <input matInput
+                        type="text"
+                        [(ngModel)]="usuario.localidad"
+                        required>
+            </mat-form-field>
+            <div fxLayout="row" fxFlex="100%" fxLayoutGap="40px">
+                <mat-form-field fxFlex="50">
+                    <mat-label>Codigo Postal</mat-label>
+                    <input matInput
+                            type="number"
+                            [(ngModel)]="usuario.codigoPostal"
+                            required>
+                </mat-form-field>
+                <mat-form-field fxFlex="50">
+                    <mat-label>Celular</mat-label>
+                    <input matInput
+                            type="number"
+                            [(ngModel)]="usuario.celular"
+                            required>
+                </mat-form-field>
+            </div>
+            <mat-form-field>
+                <mat-label>Direccion</mat-label>
+                <input matInput
+                        type="text"
+                        [(ngModel)]="usuario.direccion"
+                        required>
+            </mat-form-field>
+
             <br>
 
             <button mat-raised-button 

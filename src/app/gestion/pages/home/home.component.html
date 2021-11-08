@@ -1,36 +1,36 @@
 <div class="example-container">
 
-
     <mat-toolbar color="primary">
 
-        <button mat-button (click)="sidenav.toggle()" fxHide.xs>
+        <button mat-button (click)="sidenav.toggle()" fxHide.xs fxHide.sm>
             Menu<mat-icon style="margin-left: 5px;">menu</mat-icon>
         </button>
 
-        <button mat-button [matMenuTriggerFor]="menu" fxHide.xl>
+        <button mat-button [matMenuTriggerFor]="menu" fxHide.xl fxHide.md fxHide.lg>
             <mat-icon style="margin-right: 10px;">account_circle</mat-icon>
         </button>
 
         <span class="spacer"></span>
 
-        <h1>TU HERMANA</h1>
+        <img class="logo-container" src="/assets/image/image.png">
 
         <span class="spacer"></span>
 
-        <button mat-button [matMenuTriggerFor]="menu" fxHide.xs>{{usuario.nombre}}
+        <button mat-button [matMenuTriggerFor]="menu" fxHide.xs fxHide.sm>{{usuario.nombre}}
             <mat-icon style="margin-left: 10px;">account_circle</mat-icon>
         </button>
 
-        <mat-menu #menu="matMenu">
+        <button mat-button (click)="sidenavMovile.toggle()" fxHide.xl fxHide.md fxHide.lg>
+            <mat-icon style="margin-left: 5px;">menu</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu" xPosition="before">
             <button mat-menu-item (click)="logout()" routerLink="/auth/login">
                 <mat-icon>logout</mat-icon>
                 Logout
             </button>
         </mat-menu>
 
-        <button mat-button (click)="sidenavMovile.toggle()" fxHide.xl>
-            <mat-icon style="margin-left: 5px;">menu</mat-icon>
-        </button>
 
     </mat-toolbar>
 
@@ -80,7 +80,7 @@
             </mat-nav-list>
         </mat-sidenav>
 
-        <mat-sidenav #sidenav mode="side" opened fxHide.xs>
+        <mat-sidenav #sidenav mode="side" opened fxHide.xs fxHide.sm>
             <mat-nav-list>
                 <a routerLink="./autor" mat-list-item>
                     <span>Autores</span>
@@ -110,7 +110,7 @@
                     <span>Preguntas frecuentes</span>
                 </a>
                 <hr>
-                <a routerLink="./producto" mat-list-item >
+                <a routerLink="./producto" mat-list-item>
                     <span>Productos</span>
                 </a>
                 <hr>
@@ -124,12 +124,12 @@
                 <hr>
             </mat-nav-list>
         </mat-sidenav>
-        
+
         <div class="container">
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-container>
 
-    
+
 
 </div>

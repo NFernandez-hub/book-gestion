@@ -66,7 +66,7 @@ export class CrearSubCategoriaComponent implements OnInit {
 
   guardar() {
 
-    if (this.subCategoria.nombre.trim().length === 0) {
+    if (this.subCategoria.nombre.trim().length === 0 || this.subCategoria.categoria._id?.trim().length === 0) {
       Swal.fire('Error', 'Campos obligatorios vacios', 'error')
     } else {
       if (this.subCategoria._id) {
@@ -76,14 +76,11 @@ export class CrearSubCategoriaComponent implements OnInit {
             this.router.navigate(['/gestion/subCategoria'])
           })
       } else {
-        console.log(this.subCategoria)
         this.subCategoriaService.nuevaSubCategoria(this.subCategoria.nombre, this.subCategoria.categoria._id!)
           .subscribe(ok => {
             if (ok === true) {
               Swal.fire('Sub-Categoria agregada correctamente', this.subCategoria.nombre, 'success')
               this.router.navigate(['/gestion/subCategoria'])
-            } else {
-              Swal.fire('Error', `La sub-categoria ${this.subCategoria.nombre} ya se encuentra registrada`, 'error')
             }
           })
       }

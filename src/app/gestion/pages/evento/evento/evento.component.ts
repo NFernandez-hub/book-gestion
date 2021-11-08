@@ -22,6 +22,8 @@ import Swal from 'sweetalert2';
 export class EventoComponent implements OnInit {
 
   eventos: Evento[] = []
+  horaEvento!: number
+  minEvento!: number
 
   TiposBuscador = [
     { id: 'nombre', desc: 'nombre' },
@@ -36,9 +38,9 @@ export class EventoComponent implements OnInit {
     'nombre',
     'lugar',
     'usuario',
+    'fecha',
     'botones',
     'botones2',
-
   ]
 
   constructor(private eventoService: EventoService,

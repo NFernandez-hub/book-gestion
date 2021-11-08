@@ -29,7 +29,6 @@ export class AuthService {
         tap(resp => {
           if (resp.ok) {
             this.setToken(resp)
-            console.log(resp)
           }
         }),
         map(resp => resp.ok),
@@ -48,7 +47,6 @@ export class AuthService {
         tap(resp => {
           if (resp.ok) {
             this.setToken(resp)
-            console.log(resp)
           }
         }),
         map(resp => resp.ok),

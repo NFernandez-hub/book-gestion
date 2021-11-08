@@ -4,6 +4,7 @@ export interface Evento {
     nombre: string,
     descripcion: string,
     lugar: string,
+    fechaHora: Date,
     usuario?: {
         _id?: string,
         nombre?: string

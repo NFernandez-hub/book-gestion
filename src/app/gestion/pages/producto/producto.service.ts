@@ -46,16 +46,9 @@ export class ProductoService {
       )
   }
 
-  nuevoProducto(titulo: string, descripcion: string, precio: number,
-    isbn: number, formato: string, editorial: string, autor: string,
-    subCategoria: string, idioma: string, edicion: string, stock: number) {
-
-    const body = {
-      titulo, descripcion, precio, isbn, formato, editorial, autor,
-      subCategoria, idioma, edicion, stock
-    }
+  nuevoProducto(producto: Producto) {
     
-    return this.http.post<Producto>(`${this.baseUrl}/productos/`, body, this.headers)
+    return this.http.post<Producto>(`${this.baseUrl}/productos/`, producto, this.headers)
       .pipe(
         map(resp => resp.ok),
         catchError(err => of(err.error.msg))

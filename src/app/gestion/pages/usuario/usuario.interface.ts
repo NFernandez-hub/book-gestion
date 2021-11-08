@@ -9,6 +9,11 @@ export interface Usuario {
     rol: Role,
     estado: boolean,
     google: boolean,
+    provincia: string,
+    codigoPostal?: number,
+    localidad: string,
+    celular?: number,
+    direccion: string
 
 }
 

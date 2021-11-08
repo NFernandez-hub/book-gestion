@@ -44,14 +44,14 @@ export class CategoriaComponent implements OnInit {
         this.categorias = categorias
       })
   }
-  
+
   buscando() {
     if (this.termino.trim() === '') {
 
       Swal.fire('Info', 'Debe ingresar un termino de busqueda', 'info')
 
     } else {
-      
+
       this.categoriaService.getUsuariosBuscador(this.termino.trim())
         .subscribe(categorias => {
           console.log(categorias)
@@ -65,15 +65,29 @@ export class CategoriaComponent implements OnInit {
   }
 
   async nuevoSweetAlert() {
+
+    const pattern = /^[a-zA-Z]*$/;
+
     const { value } = await Swal.fire<string>({
       title: 'Crear categoria',
       text: 'Ingrese la categoria',
       input: 'text',
       inputPlaceholder: 'Descripcion',
       showCancelButton: true,
+      inputValidator: (value) => {
+        return new Promise((resolve) => {
+          if (pattern.test(value)) {
+            resolve('')
+          } else {
+            resolve(`El nombre de la Categoria no puede contener numeros: ${value}`)
+          }
+        })
+      }
     })
 
-    if (value!.trim().length > 0) {
+    if (!value) {
+      return
+    } else if (value!.trim().length > 0) {
       this.categoriaService.nuevaCategoria(value!)
         .subscribe(ok => {
           console.log(ok);
@@ -94,6 +108,7 @@ export class CategoriaComponent implements OnInit {
   }
 
   async modificarSweetAlert(id: string, nombre: string) {
+    const pattern = /^[a-zA-Z]*$/;
 
     const { value } = await Swal.fire<string>({
       title: 'Modificar categoria',
@@ -101,9 +116,20 @@ export class CategoriaComponent implements OnInit {
       input: 'text',
       inputPlaceholder: `${nombre}`,
       showCancelButton: true,
+      inputValidator: (value) => {
+        return new Promise((resolve) => {
+          if (pattern.test(value)) {
+            resolve('')
+          } else {
+            resolve(`El nombre de la Categoria no puede contener numeros: ${value}`)
+          }
+        })
+      }
     })
 
-    if (value!.trim().length > 0) {
+    if (!value) {
+      return
+    } else if (value!.trim().length > 0) {
       this.categoriaService.actualizarCategorias(id, value!)
         .subscribe((ok) => {
           console.log(ok);
@@ -134,14 +160,14 @@ export class CategoriaComponent implements OnInit {
 
       if (result.isConfirmed) {
         this.categoriaService.eliminarCategoria(categoria._id)
-      .subscribe(ok => {
-        if (ok === true) {
-          this.cargarCategorias()
-          Swal.fire('Autor eliminado correctamente', categoria.nombre, 'success')
-        } else {
-          Swal.fire('Error', ok, 'error')
-        }
-      })
+          .subscribe(ok => {
+            if (ok === true) {
+              this.cargarCategorias()
+              Swal.fire('Autor eliminado correctamente', categoria.nombre, 'success')
+            } else {
+              Swal.fire('Error', ok, 'error')
+            }
+          })
       }
     })
   }

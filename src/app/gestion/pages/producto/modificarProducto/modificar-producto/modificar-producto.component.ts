@@ -43,15 +43,15 @@ export class ModificarProductoComponent implements OnInit {
     formato: '',
     editorial: {
       _id: '',
-      nombre:'',
+      nombre: '',
     },
     autor: {
       _id: '',
-      nombre:'',
+      nombre: '',
     },
     subCategoria: {
       _id: '',
-      nombre:'',
+      nombre: '',
     },
     idioma: '',
     edicion: '',
@@ -112,7 +112,7 @@ export class ModificarProductoComponent implements OnInit {
 
   public inputValidator(event: any) {
     //console.log(event.target.value);
-    const pattern = /^[a-zA-Z]*$/;   
+    const pattern = /^[a-zA-Z]*$/;
     //let inputChar = String.fromCharCode(event.charCode)
     if (!pattern.test(event.target.value)) {
       event.target.value = event.target.value.replace(/[^a-zA-Z]/g, "");
@@ -140,19 +140,27 @@ export class ModificarProductoComponent implements OnInit {
   }
 
   guardar() {
-    if (this.producto.titulo.trim().length === 0) {
+
+    if (this.producto.titulo.trim().length === 0 || this.producto.descripcion.trim().length === 0
+      || this.producto.precio?.toString().trim().length === undefined || this.producto.isbn?.toString().trim().length === undefined
+      || this.producto.formato.trim().length === 0 || this.producto.subCategoria._id.trim().length === 0
+      || this.producto.autor._id.trim().length === 0 || this.producto.editorial._id.trim().length === 0
+      || this.producto.idioma.trim().length === 0 || this.producto.edicion.trim().length === 0
+      || this.producto.stock?.toString().trim().length === undefined) {
       Swal.fire('Error', 'Campos obligatorios vacios', 'error')
+    } else if (this.producto.precio < 0 || this.producto.isbn < 0 || this.producto.stock < 0) {
+      Swal.fire('Error', 'Los campos numericos: Precio , ISBN y stock no pueden tener valores negativos', 'error')
     } else {
-      if (this.producto._id) {
-        console.log(this.producto)
-        this.productoService.actualizarProducto(this.producto)
-          .subscribe(resp => {
+      console.log(this.producto)
+      this.productoService.actualizarProducto(this.producto)
+        .subscribe(ok => {
+          if (ok === true) {
             Swal.fire('Producto actualizado correctamente', this.producto.titulo, 'success')
             this.router.navigate(['/gestion/producto'])
-          })
-      } else {
-        Swal.fire('Error', `El producto ${this.producto.titulo} ya se encuentra registrada`, 'error')
-      }
+          } else {
+            Swal.fire('Error', ok, 'error')
+          }
+        })
     }
   }
 }

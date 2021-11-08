@@ -6,7 +6,7 @@ import { EditorialService } from './editorial.service';
 @Component({
   selector: 'app-editorial',
   templateUrl: './editorial.component.html',
-  styles:[
+  styles: [
     `table { width: 100%; }
     .mat-column-botones { width: 20px; }
     .mat-column-botones2 { width: 32px; }
@@ -34,7 +34,7 @@ export class EditorialComponent implements OnInit {
     this.cargarEditoriales()
   }
 
-  cargarEditoriales(){
+  cargarEditoriales() {
     this.cargando = true;
 
     this.editorialService.getEditoriales()
@@ -50,7 +50,7 @@ export class EditorialComponent implements OnInit {
       Swal.fire('Info', 'Debe ingresar un termino de busqueda', 'info')
 
     } else {
-      
+
       this.editorialService.getEditorialesBuscador(this.termino.trim())
         .subscribe(editoriales => {
           console.log(editoriales)
@@ -64,26 +64,37 @@ export class EditorialComponent implements OnInit {
   }
 
   async nuevoSweetAlert() {
+    const pattern = /^[a-zA-Z]*$/;
+
     const { value } = await Swal.fire<string>({
       title: 'Crear Editorial',
       text: 'Ingrese el nombre de la editorial',
       input: 'text',
       inputPlaceholder: 'Nombre de la editorial',
       showCancelButton: true,
+      inputValidator: (value) => {
+        return new Promise((resolve) => {
+          if (pattern.test(value)) {
+            resolve('')
+          } else {
+            resolve(`El nombre de la Editorial no puede contener numeros: ${value}`)
+          }
+        })
+      }
     })
 
-    if (value!.trim().length > 0) {
+    if (!value) {
+      return
+    } else if (value!.trim().length > 0) {
       this.editorialService.nuevaEditorial(value!)
         .subscribe(ok => {
-          // if (ok === true) {
+          if (ok === true) {
             this.cargarEditoriales()
-            Swal.fire('Editorial agregada correctamente' , value , 'success')
-          // } else {
-            // Swal.fire('Error', ok, 'error')
-          // }
+            Swal.fire('Editorial agregada correctamente', value, 'success')
+          } else {
+            Swal.fire('Error', ok, 'error')
+          }
         })
-    } else {
-      Swal.fire('Error', 'Nombre no valido', 'error')
     }
   }
 
@@ -92,6 +103,7 @@ export class EditorialComponent implements OnInit {
   }
 
   async modificarSweetAlert(id: string, nombre: string) {
+    const pattern = /^[a-zA-Z]*$/;
 
     const { value } = await Swal.fire<string>({
       title: 'Modificar editorial',
@@ -99,26 +111,33 @@ export class EditorialComponent implements OnInit {
       input: 'text',
       inputPlaceholder: `${nombre}`,
       showCancelButton: true,
+      inputValidator: (value) => {
+        return new Promise((resolve) => {
+          if (pattern.test(value)) {
+            resolve('')
+          } else {
+            resolve(`El nombre de la Editorial no puede contener numeros: ${value}`)
+          }
+        })
+      }
     })
 
-    console.log(id, value)
-
-    if (value!.trim().length > 0) {
+    if (!value) {
+      return
+    } else if (value!.trim().length > 0) {
       this.editorialService.actualizarEditorial(id, value!)
         .subscribe((ok) => {
           if (ok === true) {
             this.cargarEditoriales()
-            Swal.fire('Editorial actualizada correctamente' , value , 'success')
+            Swal.fire('Editorial actualizada correctamente', value, 'success')
           } else {
             Swal.fire('Error', ok, 'error')
           }
         })
-    } else {
-      Swal.fire('Error', 'Nombre no valido', 'error')
     }
   }
 
-  eliminarEditorial(editorial: Editorial){
+  eliminarEditorial(editorial: Editorial) {
     Swal.fire({
       title: 'Esta seguro ?',
       text: `La Editorial: ${editorial.nombre} se eliminara de forma permanente`,
@@ -132,14 +151,14 @@ export class EditorialComponent implements OnInit {
 
       if (result.isConfirmed) {
         this.editorialService.eliminarEditorial(editorial._id)
-      .subscribe(ok => {
-        if (ok === true) {
-          this.cargarEditoriales()
-          Swal.fire('Editorial eliminada correctamente', editorial.nombre, 'success')
-        } else {
-          Swal.fire('Error', ok, 'error')
-        }
-      })
+          .subscribe(ok => {
+            if (ok === true) {
+              this.cargarEditoriales()
+              Swal.fire('Editorial eliminada correctamente', editorial.nombre, 'success')
+            } else {
+              Swal.fire('Error', ok, 'error')
+            }
+          })
       }
     })
   }

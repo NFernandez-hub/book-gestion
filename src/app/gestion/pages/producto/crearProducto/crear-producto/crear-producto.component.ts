@@ -26,15 +26,15 @@ export class CrearProductoComponent implements OnInit {
   producto: Producto = {
     titulo: '',
     descripcion: '',
-    precio: 0,
-    isbn: 0,
+    precio: undefined,
+    isbn: undefined,
     formato: '',
     editorial: '',
     autor: '',
     subCategoria: '',
-    idioma: '', 
+    idioma: '',
     edicion: '',
-    stock: 0,
+    stock: undefined,
   }
 
   public subCategorias: SubCategoria[] = []
@@ -90,32 +90,35 @@ export class CrearProductoComponent implements OnInit {
 
   public inputValidator(event: any) {
     //console.log(event.target.value);
-    const pattern = /^[a-zA-Z]*$/;   
+    const pattern = /^[a-zA-Z]*$/;
     //let inputChar = String.fromCharCode(event.charCode)
     if (!pattern.test(event.target.value)) {
       event.target.value = event.target.value.replace(/[^a-zA-Z]/g, "");
       // invalid character, prevent input
-
     }
   }
 
   guardar() {
-    if (this.producto.titulo.trim().length === 0) {
+    if (this.producto.titulo.trim().length === 0 || this.producto.descripcion.trim().length === 0
+      || this.producto.precio?.toString().trim().length === undefined || this.producto.isbn?.toString().trim().length === undefined
+      || this.producto.formato.trim().length === 0 || this.producto.subCategoria.trim().length === 0
+      || this.producto.autor.trim().length === 0 || this.producto.editorial.trim().length === 0
+      || this.producto.idioma.trim().length === 0 || this.producto.edicion.trim().length === 0
+      || this.producto.stock?.toString().trim().length === undefined) {
       Swal.fire('Error', 'Campos obligatorios vacios', 'error')
+    } else if (this.producto.precio < 0 || this.producto.isbn < 0 || this.producto.stock < 0) {
+      Swal.fire('Error', 'Los campos numericos: Precio , ISBN y stock no pueden tener valores negativos', 'error')
+    } else {
+      console.log(this.producto)
+      this.productoService.nuevoProducto(this.producto)
+        .subscribe(ok => {
+          if (ok === true) {
+            Swal.fire('Producto agregado correctamente', this.producto.titulo, 'success')
+            this.router.navigate(['/gestion/producto'])
+          } else {
+            Swal.fire('Error', ok, 'error')
+          }
+        })
     }
-    console.log(this.producto)
-    this.productoService.nuevoProducto(this.producto.titulo, this.producto.descripcion, this.producto.precio,
-      this.producto.isbn, this.producto.formato, this.producto.editorial, this.producto.autor,
-      this.producto.subCategoria, this.producto.idioma, this.producto.edicion, this.producto.stock)
-      .subscribe(ok => {
-        if (ok === true) {
-          Swal.fire('Producto agregado correctamente', this.producto.titulo, 'success')
-          this.router.navigate(['/gestion/producto'])
-        } else {
-          Swal.fire('Error', `El producto ${this.producto.titulo} ya se encuentra registrada`, 'error')
-        }
-      })
-
   }
-
 }

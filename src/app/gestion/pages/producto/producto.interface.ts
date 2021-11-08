@@ -4,8 +4,8 @@ export interface Producto {
     _id?: string,
     titulo: string,
     descripcion: string,
-    precio: number,
-    isbn: number,
+    precio?: number,
+    isbn?: number,
     formato: string,
     img?: string,
     editorial: string,
@@ -13,7 +13,7 @@ export interface Producto {
     subCategoria: string,
     idioma: string,
     edicion: string,
-    stock: number,
+    stock?: number,
     usuario?: {
         _id: string,
         nombre: string

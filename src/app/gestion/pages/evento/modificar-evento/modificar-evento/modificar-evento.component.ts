@@ -11,7 +11,7 @@ import { EventoService } from '../../evento/evento.service';
   templateUrl: './modificar-evento.component.html',
   styles: [`
     .example-card {
-      max-width: 550px;
+      max-width: 333px;
     }
 
     .example-header-image {
@@ -21,11 +21,16 @@ import { EventoService } from '../../evento/evento.service';
 })
 export class ModificarEventoComponent implements OnInit {
 
+  hora : number = 0.
+  minuto : number = 0.
+  fecha !: Date
+
   evento: Evento = {
     ok: false,
     nombre: '',
     descripcion: '',
     lugar: '',
+    fechaHora: new Date
   }
 
   public imagenSubir!: File;
@@ -45,7 +50,19 @@ export class ModificarEventoComponent implements OnInit {
       .pipe(
         switchMap(({ id }) => this.eventoService.getEventosPorId(id))
       )
-      .subscribe(evento => this.evento = evento)
+      .subscribe(evento => {
+        this.evento = evento
+        this.setFecha(evento)
+      })
+  }
+
+  setFecha(evento: Evento) {
+    this.fecha = evento.fechaHora
+
+    var fechaEvento = new Date(evento.fechaHora)
+
+    this.hora = fechaEvento.getHours() + 3;
+    this.minuto = fechaEvento.getMinutes()
   }
 
   cambiarImagen(event: any): any {
@@ -64,7 +81,7 @@ export class ModificarEventoComponent implements OnInit {
 
   public inputValidator(event: any) {
     //console.log(event.target.value);
-    const pattern = /^[a-zA-Z]*$/;   
+    const pattern = /^[a-zA-Z]*$/;
     //let inputChar = String.fromCharCode(event.charCode)
     if (!pattern.test(event.target.value)) {
       event.target.value = event.target.value.replace(/[^a-zA-Z]/g, "");
@@ -80,18 +97,26 @@ export class ModificarEventoComponent implements OnInit {
   }
 
   guardar() {
-    if (this.evento.nombre.trim().length === 0) {
+    if (this.evento.nombre.trim().length === 0 || this.evento.descripcion.trim().length === 0 || this.evento.lugar.trim().length === 0
+      || this.fecha === null || this.hora == null || this.minuto == null) {
+        
       Swal.fire('Error', 'Campos obligatorios vacios', 'error')
+    } else if (this.hora >= 24 || this.minuto >= 59) {
+      Swal.fire('Error', 'Asegurece de que la hora sea correcta', 'error')
     } else {
-      if (this.evento._id) {
-        this.eventoService.actualizarEvento(this.evento)
-          .subscribe(ok => {
-            if (ok === true) {
-              Swal.fire('Usuario modificado correctamente', this.evento.nombre, 'success')
-              this.router.navigate(['/gestion/evento'])
-            }
-          })
-      }
+      var setFecha = new Date(this.fecha)
+      setFecha.setHours((this.hora - 3), this.minuto)
+      this.evento.fechaHora = setFecha
+
+      this.eventoService.actualizarEvento(this.evento)
+        .subscribe(ok => {
+          if (ok === true) {
+            Swal.fire('Evento modificado correctamente', this.evento.nombre, 'success')
+            this.router.navigate(['/gestion/evento'])
+          } else {
+            Swal.fire('Error', ok, 'error')
+          }
+        })
     }
   }
 }

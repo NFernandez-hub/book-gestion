@@ -10,7 +10,7 @@
     class="animate__animated animate__fadeIn"
     fxFlex="50">
      
-    <div fxLayout="column" fxFlex="100%">
+    <div fxLayout="column" fxFlex="100%" style="justify-content: space-around">
        
       <mat-form-field>
           <mat-label>Nombre</mat-label>
@@ -35,7 +35,28 @@
                  [(ngModel)]="evento.lugar"
                  required>
       </mat-form-field>
-      <br>
+      <div fxLayout="row">
+        <mat-form-field>
+            <mat-label>Fecha y Hora</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="fecha" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field style="width: 20px; margin-left: 20px; text-align: center;">
+            <input matInput
+                    type="number"
+                    [(ngModel)]="hora"
+                    required>
+        </mat-form-field>
+        <h1 style="margin-top: 8px;">:</h1>
+        <mat-form-field style="width: 20px; text-align: center;">
+            <input matInput
+                    type="number"
+                    [(ngModel)]="minuto"
+                    required>
+        </mat-form-field>
+    </div>
       <button mat-raised-button 
               color="primary"
               (click)="guardar()">
