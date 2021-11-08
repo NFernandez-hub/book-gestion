@@ -27,6 +27,7 @@ import { AgregarPreguntaFrecuenteComponent } from './pages/preguntas-frecuentes/
 import { ModificarPreguntaFrecuenteComponent } from './pages/preguntas-frecuentes/modificar-preguntaFrecuente/modificar-pregunta-frecuente/modificar-pregunta-frecuente.component';
 import { CuponComponent } from './pages/cupon/cupon.component';
 import { CrearCuponComponent } from './pages/cupon/crear-cupon/crear-cupon/crear-cupon.component';
+import { CommitComponent } from './asdasdasd/commit/commit.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { CrearCuponComponent } from './pages/cupon/crear-cupon/crear-cupon/crear
     ModificarPreguntaFrecuenteComponent,
     CuponComponent,
     CrearCuponComponent,
+    CommitComponent,
   ],
   imports: [
     CommonModule,
