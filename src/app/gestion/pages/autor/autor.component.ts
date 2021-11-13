@@ -52,13 +52,13 @@ export class AutorComponent implements OnInit {
   buscando() {
     if (this.termino.trim() === '') {
 
-      Swal.fire('Info', 'Debe ingresar un termino de busqueda', 'info')
+      this.cargarAutores()
 
     } else {
 
       this.autorService.getAutoresBuscador(this.termino.trim())
         .subscribe(autores => {
-          console.log(autores)
+          
           if (autores.ok === false || autores.length === 0) {
             Swal.fire('Error', `No se encontraron resultados con el termino: ${this.termino}`, 'error')
           } else {
@@ -69,7 +69,7 @@ export class AutorComponent implements OnInit {
   }
 
   async nuevoSweetAlert() {
-    const pattern = /^[a-zA-Z]*$/; 
+    const pattern = /^[a-zA-Z ]*$/; 
 
     const { value } = await Swal.fire<string>({
       title: 'Crear Autor',
@@ -111,7 +111,7 @@ export class AutorComponent implements OnInit {
   }
 
   async modificarSweetAlert(id: string, nombre: string) {
-    const pattern = /^[a-zA-Z]*$/; 
+    const pattern = /^[a-zA-Z ]*$/; 
 
     const { value } = await Swal.fire<string>({
       title: 'Modificar Autor',

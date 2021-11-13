@@ -1,23 +1,33 @@
 <mat-card style="max-width: 600px;">
-    <h1> Comprobante <small></small></h1>
+    <h1 class="animate__animated animate__fadeIn"> Comprobante <small></small></h1>
 
     <div fxLayout="row" class="animate__animated animate__fadeIn" fxLayout.xs="column">
 
         <div fxLayout="row" fxLayoutGap="40px" class="animate__animated animate__fadeIn" fxLayout.xs="column"
             fxFlex="100">
 
-            <div fxLayout="column" fxFlex="100">
+            <div fxLayout="column" fxFlex="100" class="animate__animated animate__fadeIn">
 
                 <mat-form-field>
                     <mat-label>N°</mat-label>
-                    <input matInput type="text" [(ngModel)]="comprobante.numero" required disabled>
+                    <input matInput type="text" [ngModel]="comprobante.numero" required disabled>
                 </mat-form-field>
 
                 <mat-form-field>
                     <mat-label>Fecha</mat-label>
-                    <input matInput type="text" [(ngModel)]="comprobante.fecha" required disabled>
+                    <input matInput type="text" [ngModel]="comprobante.fecha | date:'medium'" required disabled>
                 </mat-form-field>
 
+                <mat-form-field>
+                    <mat-label>Cupon</mat-label>
+                    <input matInput type="text" [ngModel]="comprobante.cupon.nombre | titlecase" required disabled>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Cliente</mat-label>
+                    <input matInput type="text" [ngModel]="comprobante.usuario.nombre | titlecase" required disabled>
+                </mat-form-field>
+                
                 <div style="margin-bottom: 20px;">
                     <h2>Detalle</h2>
 
@@ -25,24 +35,24 @@
                     <table mat-table [dataSource]="detalle.detComprobante.productos"
                         class="mat-lifting-z8 demo-table animate__animated animate__fadeIn">
 
-                        <ng-container matColumnDef="titulo" class="animate__animated animate__fadeIn">
-                            <th mat-header-cell *matHeaderCellDef> TITULO </th>
-                            <td mat-cell *matCellDef="let producto"> {{producto.titulo}} </td>
+                        <ng-container matColumnDef="titulo">
+                            <th mat-header-cell *matHeaderCellDef class="animate__animated animate__fadeIn"> TITULO </th>
+                            <td mat-cell *matCellDef="let producto" class="animate__animated animate__fadeIn"> {{producto.titulo}} </td>
                         </ng-container>
 
-                        <ng-container matColumnDef="precio" class="animate__animated animate__fadeIn">
-                            <th mat-header-cell *matHeaderCellDef> PRECIO/U </th>
-                            <td mat-cell *matCellDef="let producto"> {{producto.precio}} </td>
+                        <ng-container matColumnDef="precio">
+                            <th mat-header-cell *matHeaderCellDef class="animate__animated animate__fadeIn"> PRECIO/U </th>
+                            <td mat-cell *matCellDef="let producto" class="animate__animated animate__fadeIn"> {{producto.precio | currency}} </td>
                         </ng-container>
 
-                        <ng-container matColumnDef="isbn" class="animate__animated animate__fadeIn">
-                            <th mat-header-cell *matHeaderCellDef> ISBN </th>
-                            <td mat-cell *matCellDef="let producto"> {{producto.isbn}} </td>
+                        <ng-container matColumnDef="isbn">
+                            <th mat-header-cell *matHeaderCellDef class="animate__animated animate__fadeIn"> ISBN </th>
+                            <td mat-cell *matCellDef="let producto" class="animate__animated animate__fadeIn"> {{producto.isbn}} </td>
                         </ng-container>
 
-                        <ng-container matColumnDef="cantidad" class="animate__animated animate__fadeIn">
-                            <th mat-header-cell *matHeaderCellDef> CANTIDAD </th>
-                            <td mat-cell *matCellDef="let producto"> {{producto.cantidad}} </td>
+                        <ng-container matColumnDef="cantidad">
+                            <th mat-header-cell *matHeaderCellDef class="animate__animated animate__fadeIn"> CANTIDAD </th>
+                            <td mat-cell *matCellDef="let producto" class="animate__animated animate__fadeIn"> {{producto.cantidad}} </td>
                         </ng-container>
 
                         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
@@ -54,9 +64,20 @@
                 </div>
 
                 <mat-form-field>
-                    <mat-label>Total</mat-label>
-                    <input matInput type="text" [(ngModel)]="comprobante.total" required disabled>
+                    <mat-label>SubTotal</mat-label>
+                    <input matInput type="text" [ngModel]="comprobante.subTotal | currency" required disabled>
                 </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Descuento</mat-label>
+                    <input matInput type="text" [ngModel]="comprobante.descuento | currency" required disabled>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Total</mat-label>
+                    <input matInput type="text" [ngModel]="comprobante.total | currency" required disabled>
+                </mat-form-field>
+
             </div>
         </div>
     </div>

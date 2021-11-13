@@ -17,6 +17,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @NgModule({
   exports: [
@@ -37,7 +38,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatTableModule,
     MatToolbarModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgxMaterialTimepickerModule
   ]
 })
 export class MaterialModule { }

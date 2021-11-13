@@ -1,4 +1,4 @@
-<h1> Evento </h1>
+<h1 class="animate__animated animate__fadeIn"> Evento </h1>
 
 <div fxLayout="row"
   fxLayoutGap="40px"
@@ -38,7 +38,7 @@
       <div fxLayout="row">
         <mat-form-field>
             <mat-label>Fecha y Hora</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)]="fecha" required>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="fecha" required [readonly]="true">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -70,7 +70,7 @@
      
   <div fxFlex="50">
     <mat-card class="example-card animate__animated animate__fadeIn">
-      <mat-card-header>
+      <mat-card-header style="justify-content: center">
         <mat-card-title>Imagen del Evento</mat-card-title>
       </mat-card-header>
 

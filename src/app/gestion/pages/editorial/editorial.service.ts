@@ -31,7 +31,7 @@ export class EditorialService {
   }
 
   getEditorialesBuscador(termino: string) {
-    return this.http.get<Editorial[]>(`${this.baseUrl}/buscar/editoruales/nombre/${termino}`)
+    return this.http.get<Editorial[]>(`${this.baseUrl}/buscar/editoriales/nombre/${termino}`)
       .pipe(
         catchError(err => of(err.error))
       )

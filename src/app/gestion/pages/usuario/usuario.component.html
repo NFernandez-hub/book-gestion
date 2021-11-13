@@ -1,8 +1,8 @@
-<div fxLayout="row" fxLayoutGap="10px" style="margin: 5px;">
+<div fxLayout="row" fxLayoutGap="10px" style="margin: 5px;" class="animate__animated animate__fadeIn">
 
   <mat-form-field appearance="fill" fxFlex="50">
     <mat-label>Buscar</mat-label>
-    <input type="text" placeholder="seleccione un prodcuto" aria-label="Buscar Productos" matInput [(ngModel)]="termino"
+    <input type="text" aria-label="Buscar Productos" matInput [(ngModel)]="termino" (keydown.enter)="buscando()"
       required>
   </mat-form-field>
 
@@ -13,50 +13,50 @@
 </div>
 
 <div>
-  <h2 style="margin: 5px">Usuarios</h2>
+  <h2 style="margin: 5px" class="animate__animated animate__fadeIn">Usuarios</h2>
 </div>
 
 <div class="example-container mat-elevation-z8" style="margin: 5px;">
-  <table mat-table [dataSource]="usuarios" class="mat-lifting-z8 demo-table animate__animated animate__fadeIn">
+  <table mat-table [dataSource]="usuarios" class="mat-lifting-z8 demo-table">
 
     <ng-container matColumnDef="imagen" class="animate__animated animate__fadeIn">
-      <th mat-header-cell *matHeaderCellDef> IMAGEN </th>
-      <td mat-cell *matCellDef="let usuario"> <img [src]="usuario.img" style="width: 35px; margin-top: 5px;"> </td>
+      <th mat-header-cell *matHeaderCellDef class="animate__animated animate__fadeIn"> IMAGEN </th>
+      <td mat-cell *matCellDef="let usuario" class="animate__animated animate__fadeIn"> <img [src]="usuario.img" style="width: 35px; margin-top: 5px;"> </td>
     </ng-container>
 
     <ng-container matColumnDef="nombre" class="animate__animated animate__fadeIn">
-      <th mat-header-cell *matHeaderCellDef> NOMBRE </th>
-      <td mat-cell *matCellDef="let usuario"> {{usuario.nombre | titlecase}} </td>
+      <th mat-header-cell *matHeaderCellDef class="animate__animated animate__fadeIn"> NOMBRE </th>
+      <td mat-cell *matCellDef="let usuario" class="animate__animated animate__fadeIn"> {{usuario.nombre | titlecase}} </td>
     </ng-container>
 
     <ng-container matColumnDef="password" class="animate__animated animate__fadeIn">
-      <th mat-header-cell *matHeaderCellDef> PASSWORD </th>
-      <td mat-cell *matCellDef="let usuario"> {{usuario.password}} </td>
+      <th mat-header-cell *matHeaderCellDef class="animate__animated animate__fadeIn"> PASSWORD </th>
+      <td mat-cell *matCellDef="let usuario" class="animate__animated animate__fadeIn"> {{usuario.password}} </td>
     </ng-container>
 
     <ng-container matColumnDef="email" class="animate__animated animate__fadeIn">
-      <th mat-header-cell *matHeaderCellDef> USUARIO </th>
-      <td mat-cell *matCellDef="let usuario"> {{usuario.email}} </td>
+      <th mat-header-cell *matHeaderCellDef class="animate__animated animate__fadeIn"> EMAIL </th>
+      <td mat-cell *matCellDef="let usuario" class="animate__animated animate__fadeIn"> {{usuario.email}} </td>
     </ng-container>
 
     <ng-container matColumnDef="rol" class="animate__animated animate__fadeIn">
-      <th mat-header-cell *matHeaderCellDef> ROL </th>
-      <td mat-cell *matCellDef="let usuario"> {{usuario.rol}} </td>
+      <th mat-header-cell *matHeaderCellDef class="animate__animated animate__fadeIn"> ROL </th>
+      <td mat-cell *matCellDef="let usuario" class="animate__animated animate__fadeIn"> {{usuario.rol}} </td>
     </ng-container>
 
     <ng-container matColumnDef="estado" class="animate__animated animate__fadeIn">
-      <th mat-header-cell *matHeaderCellDef> ESTADO </th>
-      <td mat-cell *matCellDef="let usuario"> {{usuario.estado}} </td>
+      <th mat-header-cell *matHeaderCellDef class="animate__animated animate__fadeIn"> ESTADO </th>
+      <td mat-cell *matCellDef="let usuario" class="animate__animated animate__fadeIn"> {{usuario.estado}} </td>
     </ng-container>
 
     <ng-container matColumnDef="google" class="animate__animated animate__fadeIn">
-      <th mat-header-cell *matHeaderCellDef> GOOGLE </th>
-      <td mat-cell *matCellDef="let usuario"> {{usuario.google}} </td>
+      <th mat-header-cell *matHeaderCellDef class="animate__animated animate__fadeIn"> GOOGLE </th>
+      <td mat-cell *matCellDef="let usuario" class="animate__animated animate__fadeIn"> {{usuario.google}} </td>
     </ng-container>
 
     <ng-container matColumnDef="botones" class="animate__animated animate__fadeIn">
       <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let usuario">
+      <td mat-cell *matCellDef="let usuario" class="animate__animated animate__fadeIn">
         <a mat-raised-button class="buttonLeft" (click)="modificarNav(usuario)" color="primary">
           <mat-icon>edit</mat-icon>
         </a>
@@ -64,7 +64,7 @@
     </ng-container>
 
     <ng-container matColumnDef="botones2" class="animate__animated animate__fadeIn">
-      <th mat-header-cell *matHeaderCellDef style="padding-left: 5px;">
+      <th mat-header-cell *matHeaderCellDef style="padding-left: 5px;" class="animate__animated animate__fadeIn">
         <button mat-raised-button routerLink="/gestion/usuario/agregar" color="primary">
           <mat-icon>add</mat-icon>
         </button>

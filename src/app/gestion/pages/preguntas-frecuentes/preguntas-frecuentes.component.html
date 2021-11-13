@@ -1,72 +1,71 @@
-<div fxLayout="column" fxLayoutGap="10px" style="margin: 5px;">
+<div fxLayout="row" fxLayoutGap="10px" style="margin: 5px;" class="animate__animated animate__fadeIn">
 
-    <!-- <mat-form-field appearance="fill" fxFlex="50">
-      <mat-label>Buscar</mat-label>
-      <input type="text"
-             placeholder="seleccione un prodcuto"
-             aria-label="Buscar Productos"
-             matInput
-             [(ngModel)]="termino"
-             required>
-    </mat-form-field>
+  <mat-form-field appearance="fill" fxFlex="50">
+    <mat-label>Buscar</mat-label>
+    <input type="text"
+           aria-label="Buscar Productos"
+           matInput
+           (keydown.enter)="buscando()"
+           [(ngModel)]="termino"
+           required>
+  </mat-form-field>
+
+  <button mat-raised-button 
+          color="primary"
+          style="max-height: 50px;"
+          (click)="buscando()">
+    <mat-icon>search</mat-icon>
+  </button>
+
+</div>
   
-    <button mat-raised-button 
-            color="primary"
-            style="max-height: 50px;"
-            (click)="buscando()">
-      <mat-icon>search</mat-icon>
-    </button>
+<div>
+  <h2 style="margin: 5px" class="animate__animated animate__fadeIn">Preguntas Frecuentes</h2>
+</div>
   
-  </div> -->
-  
-  <div fxFlex="50">
-    <h2 style="margin: 5px">Preguntas Frecuentes</h2>
-  </div>
-  
-  <div class="example-container mat-elevation-z8" style="margin: 5px;">
-    <table mat-table [dataSource]="preguntas" class="mat-lifting-z8 demo-table animate__animated animate__fadeIn">
-      
-      <ng-container matColumnDef="nombre" class="animate__animated animate__fadeIn">
-        <th mat-header-cell *matHeaderCellDef> PREGUNTA </th>
-        <mat-spinner></mat-spinner>
-        <td mat-cell *matCellDef="let pregunta"> {{pregunta.pregunta | lowercase}} </td>
-      </ng-container>
-      
-      <ng-container matColumnDef="usuario" class="animate__animated animate__fadeIn">
-        <th mat-header-cell *matHeaderCellDef fxHide.xs> RESPUESTA </th>
-        <td mat-cell *matCellDef="let pregunta" fxHide.xs> {{pregunta.respuesta | lowercase}} </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="botones" class="animate__animated animate__fadeIn">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let pregunta">
-          <a mat-raised-button class="buttonLeft"
-             style="margin-left: 20px;"
-             (click)="modificarNav(pregunta)"
-             color="primary"><mat-icon>edit</mat-icon>
-          </a>
-        </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="botones2" class="animate__animated animate__fadeIn">
-        <th mat-header-cell *matHeaderCellDef style="padding-left: 5px;">
-          <button mat-raised-button
-             routerLink="/gestion/preguntasFrecuentes/agregar"
-             color="primary"><mat-icon>add</mat-icon>
-        </button>
-        </th>
-        <span></span>
-        <td mat-cell *matCellDef="let pregunta" class="animate__animated animate__fadeIn" style="padding-left: 5px;">
-          <a mat-raised-button
-              (click)="eliminarPregunta(pregunta)"
-             color="warn"><mat-icon>cancel</mat-icon>
-          </a>
-        </td>
-      </ng-container>
+<div class="example-container mat-elevation-z8" style="margin: 5px;">
+  <table mat-table [dataSource]="preguntas" class="mat-lifting-z8 demo-table">
     
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef class="animate__animated animate__fadeIn"> PREGUNTA </th>
+      <td mat-cell *matCellDef="let pregunta" class="animate__animated animate__fadeIn"> {{pregunta.pregunta | lowercase}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="usuario">
+      <th mat-header-cell *matHeaderCellDef fxHide.xs class="animate__animated animate__fadeIn"> RESPUESTA </th>
+      <td mat-cell *matCellDef="let pregunta" fxHide.xs class="animate__animated animate__fadeIn"> {{pregunta.respuesta | lowercase}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="botones" >
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let pregunta" class="animate__animated animate__fadeIn">
+        <a mat-raised-button class="buttonLeft"
+           style="margin-left: 20px;"
+           (click)="modificarNav(pregunta)"
+           color="primary"><mat-icon>edit</mat-icon>
+        </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="botones2">
+      <th mat-header-cell *matHeaderCellDef style="padding-left: 5px;" class="animate__animated animate__fadeIn">
+        <button mat-raised-button
+           routerLink="/gestion/preguntasFrecuentes/agregar"
+           color="primary"><mat-icon>add</mat-icon>
+      </button>
+      </th>
+      <span></span>
+      <td mat-cell *matCellDef="let pregunta" style="padding-left: 5px;" class="animate__animated animate__fadeIn">
+        <a mat-raised-button
+            (click)="eliminarPregunta(pregunta)"
+           color="warn"><mat-icon>cancel</mat-icon>
+        </a>
+      </td>
+    </ng-container>
   
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  
-    </table>
-  </div>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+</div>

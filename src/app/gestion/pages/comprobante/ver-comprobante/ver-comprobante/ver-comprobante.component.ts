@@ -26,7 +26,17 @@ export class VerComprobanteComponent implements OnInit {
     numero: 0,
     fecha: '',
     detalleComprobante: '',
-    total: 0
+    subTotal: undefined,
+    descuento: undefined,
+    total: undefined,
+    usuario: {
+        _id: '',
+        nombre: '',
+    },
+    cupon: {
+        _id: '',
+        nombre: ''
+    }
   }
 
   displayedColumns: string[] = ['titulo', 'precio', 'isbn', 'cantidad'];

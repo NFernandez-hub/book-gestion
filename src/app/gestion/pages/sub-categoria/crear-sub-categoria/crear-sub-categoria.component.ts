@@ -55,7 +55,7 @@ export class CrearSubCategoriaComponent implements OnInit {
 
   public inputValidator(event: any) {
     //console.log(event.target.value);
-    const pattern = /^[a-zA-Z]*$/;   
+    const pattern = /^[a-zA-Z ]*$/;
     //let inputChar = String.fromCharCode(event.charCode)
     if (!pattern.test(event.target.value)) {
       event.target.value = event.target.value.replace(/[^a-zA-Z]/g, "");
@@ -71,9 +71,13 @@ export class CrearSubCategoriaComponent implements OnInit {
     } else {
       if (this.subCategoria._id) {
         this.subCategoriaService.actualizarSubCategoria(this.subCategoria._id, this.subCategoria.nombre)
-          .subscribe(resp => {
-            Swal.fire('Sub-Categoria actualizada correctamente', this.subCategoria.nombre, 'success')
-            this.router.navigate(['/gestion/subCategoria'])
+          .subscribe(ok => {
+            if (ok === true) {
+              Swal.fire('Sub-Categoria actualizada correctamente', this.subCategoria.nombre, 'success')
+              this.router.navigate(['/gestion/subCategoria'])
+            } else {
+              Swal.fire('Error', ok, 'error')
+            }
           })
       } else {
         this.subCategoriaService.nuevaSubCategoria(this.subCategoria.nombre, this.subCategoria.categoria._id!)
@@ -81,6 +85,8 @@ export class CrearSubCategoriaComponent implements OnInit {
             if (ok === true) {
               Swal.fire('Sub-Categoria agregada correctamente', this.subCategoria.nombre, 'success')
               this.router.navigate(['/gestion/subCategoria'])
+            } else {
+              Swal.fire('Error', ok, 'error')
             }
           })
       }

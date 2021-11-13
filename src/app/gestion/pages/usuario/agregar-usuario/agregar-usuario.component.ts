@@ -92,7 +92,7 @@ export class AgregarUsuarioComponent implements OnInit {
 
   public inputValidator(event: any) {
     //console.log(event.target.value);
-    const pattern = /^[a-zA-Z]*$/;
+    const pattern = /^[a-zA-Z ]*$/;
     //let inputChar = String.fromCharCode(event.charCode)
     if (!pattern.test(event.target.value)) {
       event.target.value = event.target.value.replace(/[^a-zA-Z]/g, "");
@@ -129,6 +129,5 @@ export class AgregarUsuarioComponent implements OnInit {
           })
       }
     }
-
   }
 }

@@ -1,5 +1,5 @@
 
-<h1> Producto <small></small></h1>
+<h1 class="animate__animated animate__fadeIn"> Producto <small></small></h1>
 
 <div fxLayout="row"
      class="animate__animated animate__fadeIn"
@@ -84,7 +84,7 @@
              <mat-form-field>
                  <mat-label>Idioma</mat-label>
                  <input matInput
-                       (input)="inputValidator($event)"
+                        (input)="inputValidator($event)"
                          type="text"
                          [(ngModel)]="producto.idioma"
                          required>

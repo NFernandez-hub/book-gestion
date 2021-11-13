@@ -11,7 +11,9 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styles: [`
     .login100-form{
-      max-width: 400px;      
+      width: 400px; 
+      margin-bottom: 250px;
+      margin-top: 200px; 
     };
   `]
 })
@@ -38,13 +40,11 @@ export class LoginComponent {
 
     this.authService.login(email, password)
       .subscribe(ok => {
-
         if (ok === true) {
           this.router.navigateByUrl('/gestion/autor');
         } else {
           Swal.fire('Error', ok, 'error')
         }
-
       });
   }
 

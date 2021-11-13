@@ -5,6 +5,7 @@ import { FileUploadService } from 'src/app/gestion/services/file-upload.service'
 import Swal from 'sweetalert2';
 import { Evento } from '../../evento/evento.interface';
 import { EventoService } from '../../evento/evento.service';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @Component({
   selector: 'app-modificar-evento',
@@ -21,8 +22,8 @@ import { EventoService } from '../../evento/evento.service';
 })
 export class ModificarEventoComponent implements OnInit {
 
-  hora : number = 0.
-  minuto : number = 0.
+  hora: number = 0.
+  minuto: number = 0.
   fecha !: Date
 
   evento: Evento = {
@@ -61,8 +62,15 @@ export class ModificarEventoComponent implements OnInit {
 
     var fechaEvento = new Date(evento.fechaHora)
 
-    this.hora = fechaEvento.getHours() + 3;
-    this.minuto = fechaEvento.getMinutes()
+    console.log(fechaEvento.getHours())
+
+    if (fechaEvento.getHours() === 21) {
+      this.hora = 0
+      this.minuto = fechaEvento.getMinutes()
+    } else {
+      this.hora = fechaEvento.getHours() + 3;
+      this.minuto = fechaEvento.getMinutes()
+    }
   }
 
   cambiarImagen(event: any): any {
@@ -99,10 +107,11 @@ export class ModificarEventoComponent implements OnInit {
   guardar() {
     if (this.evento.nombre.trim().length === 0 || this.evento.descripcion.trim().length === 0 || this.evento.lugar.trim().length === 0
       || this.fecha === null || this.hora == null || this.minuto == null) {
-        
+
       Swal.fire('Error', 'Campos obligatorios vacios', 'error')
-    } else if (this.hora >= 24 || this.minuto >= 59) {
-      Swal.fire('Error', 'Asegurece de que la hora sea correcta', 'error')
+    } else if (this.hora >= 24 || this.minuto >= 60) {
+      console.log('puto')
+      Swal.fire('Error', 'La hora ingresada no es valida', 'error')
     } else {
       var setFecha = new Date(this.fecha)
       setFecha.setHours((this.hora - 3), this.minuto)

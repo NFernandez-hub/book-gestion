@@ -35,7 +35,7 @@ export class ProductoComponent implements OnInit {
 
   productos: Producto[] = []
 
-  displayedColumns: string[] = ['titulo', 'precio', 'isbn', 'stock', 'usuario', 'botones', 'botones2'];
+  displayedColumns: string[] = ['titulo','autor', 'categoria', 'editorial', 'precio', 'isbn', 'stock', 'usuario', 'botones', 'botones2'];
 
   constructor(private productoService: ProductoService,
     private router: Router) { }
@@ -52,26 +52,31 @@ export class ProductoComponent implements OnInit {
   }
 
   buscando() {
-    if (!this.tipoDeBuscada) {
 
-      Swal.fire('Info', 'Debe ingresar un tipo de busqueda', 'info')
-
-    } else if (this.termino.trim() === '') {
-
-      Swal.fire('Info', 'Debe ingresar un termino de busqueda', 'info')
-
+    if (this.termino.trim() === '') {
+      this.cargarProductos()
     } else {
+      if (!this.tipoDeBuscada) {
 
-      console.log(this.tipoDeBuscada)
-      this.productoService.getProductosBuscador(this.tipoDeBuscada, this.termino.trim())
-        .subscribe(productos => {
-          console.log(productos)
-          if (productos.ok === false || productos.length === 0) {
-            Swal.fire('Error', `No se encontraron resultados con el termino: ${this.termino}`, 'error')
-          } else {
-            this.productos = productos
-          }
-        })
+        Swal.fire('Info', 'Debe ingresar un tipo de busqueda', 'info')
+  
+      } else if (this.termino.trim() === '') {
+  
+        Swal.fire('Info', 'Debe ingresar un termino de busqueda', 'info')
+  
+      } else {
+  
+        console.log(this.tipoDeBuscada)
+        this.productoService.getProductosBuscador(this.tipoDeBuscada, this.termino.trim())
+          .subscribe(productos => {
+            console.log(productos)
+            if (productos.ok === false || productos.length === 0) {
+              Swal.fire('Error', `No se encontraron resultados con el termino: ${this.termino}`, 'error')
+            } else {
+              this.productos = productos
+            }
+          })
+      }
     }
   }
 

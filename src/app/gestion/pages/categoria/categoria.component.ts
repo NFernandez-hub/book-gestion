@@ -48,13 +48,13 @@ export class CategoriaComponent implements OnInit {
   buscando() {
     if (this.termino.trim() === '') {
 
-      Swal.fire('Info', 'Debe ingresar un termino de busqueda', 'info')
+      this.cargarCategorias()
 
     } else {
 
       this.categoriaService.getUsuariosBuscador(this.termino.trim())
         .subscribe(categorias => {
-          console.log(categorias)
+          
           if (categorias.ok === false || categorias.length === 0) {
             Swal.fire('Error', `No se encontraron resultados con el termino: ${this.termino}`, 'error')
           } else {
@@ -66,7 +66,7 @@ export class CategoriaComponent implements OnInit {
 
   async nuevoSweetAlert() {
 
-    const pattern = /^[a-zA-Z]*$/;
+    const pattern = /^[a-zA-Z ]*$/;
 
     const { value } = await Swal.fire<string>({
       title: 'Crear categoria',
@@ -108,7 +108,7 @@ export class CategoriaComponent implements OnInit {
   }
 
   async modificarSweetAlert(id: string, nombre: string) {
-    const pattern = /^[a-zA-Z]*$/;
+    const pattern = /^[a-zA-Z ]*$/;
 
     const { value } = await Swal.fire<string>({
       title: 'Modificar categoria',
@@ -135,7 +135,7 @@ export class CategoriaComponent implements OnInit {
           console.log(ok);
           if (ok === true) {
             this.cargarCategorias()
-            Swal.fire('Autor actualizado correctamente', value, 'success')
+            Swal.fire('Categoria actualizada correctamente', value, 'success')
           } else {
             Swal.fire('Error', ok, 'error')
             console.log(ok)
@@ -163,7 +163,7 @@ export class CategoriaComponent implements OnInit {
           .subscribe(ok => {
             if (ok === true) {
               this.cargarCategorias()
-              Swal.fire('Autor eliminado correctamente', categoria.nombre, 'success')
+              Swal.fire('Cetegoria eliminada correctamente', categoria.nombre, 'success')
             } else {
               Swal.fire('Error', ok, 'error')
             }

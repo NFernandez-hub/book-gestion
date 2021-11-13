@@ -35,6 +35,15 @@ export class SubCategoriaService {
   }
 
   getSubCategoriasBuscador(tipoDeBusqueda: string, termino: string) {
+
+    if (tipoDeBusqueda == 'nombre') {
+      
+      return this.http.get<SubCategoria[]>(`${this.baseUrl}/buscar/subcategorias/${tipoDeBusqueda}/${termino}`)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+    }
+
     return this.http.get<SubCategoria[]>(`${this.baseUrl}/buscar/categorias/${tipoDeBusqueda}/${termino}`)
       .pipe(
         catchError(err => of(err.error))

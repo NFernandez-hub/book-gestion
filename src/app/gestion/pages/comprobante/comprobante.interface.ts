@@ -3,5 +3,15 @@ export interface Comprobante {
     numero?: number,
     fecha?: string,
     detalleComprobante?: string,
-    total?: number
+    subTotal?: number,
+    descuento?: number,
+    total?: number,
+    usuario: {
+        _id: string,
+        nombre: string,
+    },
+    cupon: {
+        _id: string,
+        nombre: string
+    }
 }

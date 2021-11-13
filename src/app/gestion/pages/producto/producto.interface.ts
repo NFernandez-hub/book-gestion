@@ -49,12 +49,3 @@ export interface ProductoModificar {
         nombre: string
     }
 }
-
-export enum TiposBuscador {
-    
-    f = 'f',
-    editorial = 'editorial',
-    autor = 'autor',
-    subcat = 'subcat',
-    subCategoria = 'subCategoria',    
-}

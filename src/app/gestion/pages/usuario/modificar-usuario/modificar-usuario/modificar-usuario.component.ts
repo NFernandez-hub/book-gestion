@@ -106,7 +106,7 @@ export class ModificarUsuarioComponent implements OnInit {
 
   public inputValidator(event: any) {
     //console.log(event.target.value);
-    const pattern = /^[a-zA-Z]*$/;
+    const pattern = /^[a-zA-Z ]*$/;
     //let inputChar = String.fromCharCode(event.charCode)
     if (!pattern.test(event.target.value)) {
       event.target.value = event.target.value.replace(/[^a-zA-Z]/g, "");
@@ -121,26 +121,26 @@ export class ModificarUsuarioComponent implements OnInit {
   }
 
   guardar() {
-    if (this.usuario.nombre.trim().length === 0 || this.usuario.password.trim().length === 0 || this.usuario.email.trim().length === 0
+    if (this.usuario.password === undefined) {
+
+      Swal.fire('Error', 'Por favor ingrese su contraseña', 'error')
+
+    } else if (this.usuario.nombre.trim().length === 0 || this.usuario.password.trim().length === 0 || this.usuario.email.trim().length === 0
       || this.usuario.localidad.trim().length === 0 || this.usuario.provincia.trim().length === 0 || this.usuario.direccion.trim().length === 0) {
+
       Swal.fire('Error', 'Campos obligatorios vacios', 'error')
+
     } else {
 
-      if (this.usuario.codigoPostal?.toString().length !== 4) {
-        Swal.fire('Error', 'Codigo postal invalido. Ej: 4107', 'error')
-      } else if (this.usuario.celular?.toString().trim().length !== 12) {
-        Swal.fire('Error', 'Celular ingresado invalido. Ej: 543813025984', 'error')
-      } else {
-        this.usuarioService.actualizarUsuario(this.usuario)
-          .subscribe(ok => {
-            if (ok === true) {
-              Swal.fire('Usuario modificado correctamente', this.usuario.nombre, 'success')
-              this.router.navigate(['/gestion/usuario'])
-            } else {
-              Swal.fire('Error', ok, 'error')
-            }
-          })
-      }
+      this.usuarioService.actualizarUsuario(this.usuario)
+        .subscribe(ok => {
+          if (ok === true) {
+            Swal.fire('Usuario modificado correctamente', this.usuario.nombre, 'success')
+            this.router.navigate(['/gestion/usuario'])
+          } else {
+            Swal.fire('Error', ok, 'error')
+          }
+        })
     }
   }
 

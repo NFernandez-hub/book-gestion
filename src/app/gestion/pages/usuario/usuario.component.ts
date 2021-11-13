@@ -55,7 +55,7 @@ export class UsuarioComponent implements OnInit {
   buscando() {
     if (this.termino.trim() === '') {
 
-      Swal.fire('Info', 'Debe ingresar un termino de busqueda', 'info')
+      this.cargarUsuarios()
 
     } else {
       

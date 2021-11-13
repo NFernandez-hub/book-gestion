@@ -18,5 +18,8 @@ export enum TipoCupon {
 
     GIFT_CARD = "GIFT_CARD",
     VOUCHER = "VOUCHER"
+}
 
+export enum TiposBuscador {
+    
 }

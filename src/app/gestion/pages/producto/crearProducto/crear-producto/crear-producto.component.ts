@@ -90,7 +90,7 @@ export class CrearProductoComponent implements OnInit {
 
   public inputValidator(event: any) {
     //console.log(event.target.value);
-    const pattern = /^[a-zA-Z]*$/;
+    const pattern = /^[a-zA-Z ]*$/;
     //let inputChar = String.fromCharCode(event.charCode)
     if (!pattern.test(event.target.value)) {
       event.target.value = event.target.value.replace(/[^a-zA-Z]/g, "");
@@ -106,7 +106,7 @@ export class CrearProductoComponent implements OnInit {
       || this.producto.idioma.trim().length === 0 || this.producto.edicion.trim().length === 0
       || this.producto.stock?.toString().trim().length === undefined) {
       Swal.fire('Error', 'Campos obligatorios vacios', 'error')
-    } else if (this.producto.precio < 0 || this.producto.isbn < 0 || this.producto.stock < 0) {
+    } else if (this.producto.precio <= 0 || this.producto.isbn <= 0 || this.producto.stock <= 0) {
       Swal.fire('Error', 'Los campos numericos: Precio , ISBN y stock no pueden tener valores negativos', 'error')
     } else {
       console.log(this.producto)

@@ -34,6 +34,13 @@ export class PreguntasFrecuentesService {
     return this.http.get<PreguntaFrecuente>(`${this.baseUrl}/preguntasFrecuentes/${id}`)
   }
 
+  getPreguntasBuscador(termino: string) {
+    return this.http.get<PreguntaFrecuente[]>(`${this.baseUrl}/buscar/preguntas/pregunta/${termino}`)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+  }
+
   nuevaPregunta (preguntaFrecuente: PreguntaFrecuente){
 
     console.log(preguntaFrecuente)

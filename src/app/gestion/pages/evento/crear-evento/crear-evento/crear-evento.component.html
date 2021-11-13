@@ -1,5 +1,5 @@
 
-<h1> Evento <small></small></h1>
+<h1 class="animate__animated animate__fadeIn"> Evento <small></small></h1>
 
 <div fxLayout="row"
      class="animate__animated animate__fadeIn"
@@ -16,6 +16,7 @@
              <mat-form-field>
                  <mat-label>Nombre</mat-label>
                  <input matInput
+                         (input)="inputValidator($event)"
                          type="text"
                          [(ngModel)]="evento.nombre"
                          required>
@@ -23,7 +24,7 @@
              <mat-form-field>
                 <mat-label>Descripcion</mat-label>
                 <textarea matInput
-                          maxlength="300"
+                          maxlength="1000"
                           style="height: 200px;"
                           type="text"
                           [(ngModel)]="evento.descripcion"
@@ -37,24 +38,28 @@
                          required>
              </mat-form-field>
 
-            <div fxLayout="row">
+            <div fxLayout="row" style="align-items: center;">
                 <mat-form-field>
                     <mat-label>Fecha y Hora</mat-label>
-                    <input matInput [matDatepicker]="picker" [(ngModel)]="fecha" required>
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="fecha" [readonly]="true">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field style="width: 20px; margin-left: 20px; text-align: center;">
                     <input matInput
-                            type="number"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            type = "number"
+                            maxlength = "2"
                             [(ngModel)]="hora"
                             required>
                 </mat-form-field>
                 <h1 style="margin-top: 8px;">:</h1>
                 <mat-form-field style="width: 20px; text-align: center;">
                     <input matInput
-                            type="number"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            type = "number"
+                            maxlength = "2"
                             [(ngModel)]="minuto"
                             required>
                 </mat-form-field>

@@ -47,10 +47,10 @@ export class EditorialComponent implements OnInit {
   buscando() {
     if (this.termino.trim() === '') {
 
-      Swal.fire('Info', 'Debe ingresar un termino de busqueda', 'info')
+      this.cargarEditoriales()
 
     } else {
-
+      
       this.editorialService.getEditorialesBuscador(this.termino.trim())
         .subscribe(editoriales => {
           console.log(editoriales)
@@ -64,7 +64,7 @@ export class EditorialComponent implements OnInit {
   }
 
   async nuevoSweetAlert() {
-    const pattern = /^[a-zA-Z]*$/;
+    const pattern = /^[a-zA-Z ]*$/;
 
     const { value } = await Swal.fire<string>({
       title: 'Crear Editorial',
@@ -103,7 +103,7 @@ export class EditorialComponent implements OnInit {
   }
 
   async modificarSweetAlert(id: string, nombre: string) {
-    const pattern = /^[a-zA-Z]*$/;
+    const pattern = /^[a-zA-Z ]*$/;
 
     const { value } = await Swal.fire<string>({
       title: 'Modificar editorial',

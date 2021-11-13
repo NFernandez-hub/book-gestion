@@ -38,11 +38,11 @@ export class SubCategoriaComponent implements OnInit {
 
   categorias: Categoria[] = [];
 
-  displayedColumns: string[] = ['nombre', 'usuario', 'botones', 'botones2'];
+  displayedColumns: string[] = ['nombre','categoria', 'usuario', 'botones', 'botones2'];
 
   constructor(private subCategoriaService: SubCategoriaService,
     private categoriaService: CategoriaService,
-    private router:Router) { }
+    private router: Router) { }
 
   ngOnInit(): void {
     this.cargarSubCategorias()
@@ -57,27 +57,32 @@ export class SubCategoriaComponent implements OnInit {
   }
 
   buscando() {
-    if (!this.tipoDeBuscada) {
-
-      Swal.fire('Info', 'Debe ingresar un tipo de busqueda', 'info')
-
-    } else 
     if (this.termino.trim() === '') {
-
-      Swal.fire('Info', 'Debe ingresar un termino de busqueda', 'info')
-
+      this.cargarSubCategorias()
     } else {
+      if (!this.tipoDeBuscada) {
 
-      console.log(this.tipoDeBuscada)
-      this.subCategoriaService.getSubCategoriasBuscador(this.tipoDeBuscada, this.termino.trim())
-        .subscribe(subCategorias => {
-          console.log(subCategorias)
-          if (subCategorias.ok === false || subCategorias.length === 0) {
-            Swal.fire('Error', `No se encontraron resultados con el termino: ${this.termino}`, 'error')
-          } else {
-            this.subCategorias = subCategorias
-          }
-        })
+        Swal.fire('Info', 'Debe ingresar un tipo de busqueda', 'info')
+
+      } else
+        if (this.termino.trim() === '') {
+
+          Swal.fire('Info', 'Debe ingresar un termino de busqueda', 'info')
+
+        } else {
+
+          console.log(this.tipoDeBuscada)
+          this.subCategoriaService.getSubCategoriasBuscador(this.tipoDeBuscada, this.termino.trim())
+            .subscribe(subCategorias => {
+              console.log(subCategorias)
+              if (subCategorias.ok === false || subCategorias.length === 0) {
+                console.log(subCategorias)
+                Swal.fire('Error', `No se encontraron resultados con el termino: ${this.termino}`, 'error')
+              } else {
+                this.subCategorias = subCategorias
+              }
+            })
+        }
     }
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Comprobante } from './comprobante.interface';
 import { ComprobanteService } from './comprobante.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-comprobante',
@@ -19,7 +20,7 @@ import { Router } from '@angular/router';
   `]
 })
 export class ComprobanteComponent implements OnInit {
-
+  
   comprobantes: Comprobante[] = [];
 
   termino: string = '';
@@ -29,7 +30,7 @@ export class ComprobanteComponent implements OnInit {
   displayedColumns: string[] = [
     'numero',
     'fecha',
-    'monto',
+    'total',
     'botones'
   ];
 
@@ -37,10 +38,10 @@ export class ComprobanteComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.cargarAutores()
+    this.cargarComprobantes()
   }
 
-  cargarAutores() {
+  cargarComprobantes() {
     this.cargando = true;
 
     this.comprobanteService.getComprobantes()
@@ -48,6 +49,26 @@ export class ComprobanteComponent implements OnInit {
         this.cargando = false
         this.comprobantes = comprobantes
       })
+  }
+
+  buscando() {
+    if (this.termino.trim() === '') {
+
+      this.cargarComprobantes()
+
+    } else {
+
+      this.comprobanteService.getComprobantesBuscador(this.termino.trim())
+        .subscribe(comprobantes => {
+          
+          if (comprobantes.ok === false || comprobantes.length === 0) {
+            Swal.fire('Error', `No se encontraron resultados con el termino: ${this.termino}`, 'error')
+          } else {
+            this.comprobantes = comprobantes
+            console.log(this.comprobantes)
+          }
+        })
+    }
   }
 
   verNav(comprobante: Comprobante){

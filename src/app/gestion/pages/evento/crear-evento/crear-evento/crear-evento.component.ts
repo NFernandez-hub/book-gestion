@@ -17,6 +17,9 @@ export class CrearEventoComponent implements OnInit {
   minuto !: number
   fecha !: Date
 
+  minDate: Date
+  maxDate: Date
+
   evento: Evento = {
     ok: false,
     nombre: '',
@@ -30,7 +33,13 @@ export class CrearEventoComponent implements OnInit {
 
   constructor(private eventoService: EventoService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,) { }
+    private activatedRoute: ActivatedRoute,) {
+
+    const currentYear = new Date().getFullYear();
+    this.minDate = new Date(currentYear - 20, 0, 1);
+    this.maxDate = new Date(currentYear + 1, 11, 31);
+
+  }
 
   ngOnInit(): void {
     if (!this.router.url.includes('editar')) {
@@ -46,22 +55,26 @@ export class CrearEventoComponent implements OnInit {
 
   public inputValidator(event: any) {
     //console.log(event.target.value);
-    const pattern = /^[a-zA-Z]*$/;
+    const pattern = /^[a-zA-Z- ]*$/;
     //let inputChar = String.fromCharCode(event.charCode)
     if (!pattern.test(event.target.value)) {
-      event.target.value = event.target.value.replace(/[^a-zA-Z]/g, " ");
+      event.target.value = event.target.value.replace(/[^a-zA-Z]/g, "");
       // invalid character, prevent input
     }
   }
 
   guardar() {
     if (this.evento.nombre.trim().length === 0 || this.evento.descripcion.trim().length === 0 || this.evento.lugar.trim().length === 0
-          || this.fecha === null || this.hora == null || this.minuto == null) {
+      || this.fecha === null || this.hora == null || this.minuto == null) {
       Swal.fire('Error', 'Campos obligatorios vacios', 'error')
+    } else if (this.hora >= 24 || this.minuto >= 61) {
+      console.log('ura')
+      Swal.fire('Error', 'La hora ingresada no es valida', 'error')
     } else {
+      console.log(this.hora, this.minuto)
       this.fecha.setHours(this.hora, this.minuto)
       this.evento.fechaHora = this.fecha
-      
+
       this.eventoService.nuevoEvento(this.evento)
         .subscribe(ok => {
           if (ok === true) {
@@ -71,7 +84,6 @@ export class CrearEventoComponent implements OnInit {
             Swal.fire('Error', ok, 'error')
           }
         })
-
     }
   }
 

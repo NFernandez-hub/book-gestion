@@ -112,7 +112,7 @@ export class ModificarProductoComponent implements OnInit {
 
   public inputValidator(event: any) {
     //console.log(event.target.value);
-    const pattern = /^[a-zA-Z]*$/;
+    const pattern = /^[a-zA-Z ]*$/;
     //let inputChar = String.fromCharCode(event.charCode)
     if (!pattern.test(event.target.value)) {
       event.target.value = event.target.value.replace(/[^a-zA-Z]/g, "");
@@ -151,7 +151,6 @@ export class ModificarProductoComponent implements OnInit {
     } else if (this.producto.precio < 0 || this.producto.isbn < 0 || this.producto.stock < 0) {
       Swal.fire('Error', 'Los campos numericos: Precio , ISBN y stock no pueden tener valores negativos', 'error')
     } else {
-      console.log(this.producto)
       this.productoService.actualizarProducto(this.producto)
         .subscribe(ok => {
           if (ok === true) {

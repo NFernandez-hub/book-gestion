@@ -1,4 +1,4 @@
-<h1> Usuario <small></small></h1>
+<h1 class="animate__animated animate__fadeIn"> Usuario <small></small></h1>
 
 <div fxLayout="row"
      fxLayoutGap="40px"
@@ -105,7 +105,7 @@
 
     <div fxFlex="50">
         <mat-card class="example-card animate__animated animate__fadeIn">
-            <mat-card-header>
+            <mat-card-header style="justify-content: center">
               <mat-card-title>Imagen del Usuario</mat-card-title>
             </mat-card-header>
             <img *ngIf="!imgTemp" mat-card-image [src]="usuario.img" class="animate__animated animate__fadeIn">

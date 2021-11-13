@@ -27,7 +27,6 @@ import { AgregarPreguntaFrecuenteComponent } from './pages/preguntas-frecuentes/
 import { ModificarPreguntaFrecuenteComponent } from './pages/preguntas-frecuentes/modificar-preguntaFrecuente/modificar-pregunta-frecuente/modificar-pregunta-frecuente.component';
 import { CuponComponent } from './pages/cupon/cupon.component';
 import { CrearCuponComponent } from './pages/cupon/crear-cupon/crear-cupon/crear-cupon.component';
-import { CommitComponent } from './asdasdasd/commit/commit.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +52,6 @@ import { CommitComponent } from './asdasdasd/commit/commit.component';
     ModificarPreguntaFrecuenteComponent,
     CuponComponent,
     CrearCuponComponent,
-    CommitComponent,
   ],
   imports: [
     CommonModule,
@@ -62,6 +60,6 @@ import { CommitComponent } from './asdasdasd/commit/commit.component';
     FormsModule,
     ReactiveFormsModule,
     GestionRoutingModule,
-  ]
+  ],
 })
 export class GestionModule { }

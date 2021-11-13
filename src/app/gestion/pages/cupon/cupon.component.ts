@@ -21,6 +21,15 @@ import Swal from 'sweetalert2';
 })
 export class CuponComponent implements OnInit {
 
+  TiposBuscador = [
+    {id: 'nombre', desc: 'nombre'},
+    {id: 'codigo', desc: 'codigo'}
+  ]
+
+  termino = '';
+
+  tipoDeBuscada: string = '';
+
   cupones: Cupon[] = [];
 
   cargando = true;
@@ -42,6 +51,35 @@ export class CuponComponent implements OnInit {
         this.cargando = false;
         this.cupones = cupones
       })
+  }
+
+  buscando() {
+
+    if (this.termino.trim() === '') {
+      this.cargarCupones()
+    } else {
+      if (!this.tipoDeBuscada) {
+
+        Swal.fire('Info', 'Debe ingresar un tipo de busqueda', 'info')
+  
+      } else if (this.termino.trim() === '') {
+  
+        Swal.fire('Info', 'Debe ingresar un termino de busqueda', 'info')
+  
+      } else {
+  
+        console.log(this.tipoDeBuscada)
+        this.cuponService.getCuponesBuscador(this.tipoDeBuscada, this.termino.trim())
+          .subscribe(cupones => {
+            console.log(cupones)
+            if (cupones.ok === false || cupones.length === 0) {
+              Swal.fire('Error', `No se encontraron resultados con el termino: ${this.termino}`, 'error')
+            } else {
+              this.cupones = cupones
+            }
+          })
+      }
+    }
   }
 
   modificarNav(cupon: Cupon) {

@@ -51,24 +51,24 @@ export class PreguntasFrecuentesComponent implements OnInit {
       })
   }
 
-  // buscando() {
-  //   if (this.termino.trim() === '') {
+  buscando() {
+    if (this.termino.trim() === '') {
 
-  //     Swal.fire('Info', 'Debe ingresar un termino de busqueda', 'info')
+      this.cargarPreguntas()
 
-  //   } else {
+    } else {
 
-  //     this.autorService.getAutoresBuscador(this.termino.trim())
-  //       .subscribe(preguntas => {
-  //         console.log(autores)
-  //         if (preguntas.ok === false || preguntas.length === 0) {
-  //           Swal.fire('Error', `No se encontraron resultados con el termino: ${this.termino}`, 'error')
-  //         } else {
-  //           this.preguntas = preguntas
-  //         }
-  //       })
-  //   }
-  // }
+      this.preguntasFrecuentesService.getPreguntasBuscador(this.termino.trim())
+        .subscribe(preguntas => {
+          
+          if (preguntas.ok === false || preguntas.length === 0) {
+            Swal.fire('Error', `No se encontraron resultados con el termino: ${this.termino}`, 'error')
+          } else {
+            this.preguntas = preguntas
+          }
+        })
+    }
+  }
 
   modificarNav(pregunta: PreguntaFrecuente) {
     this.router.navigate([`gestion/preguntasFrecuentes/editar/${pregunta._id}`])
@@ -91,7 +91,7 @@ export class PreguntasFrecuentesComponent implements OnInit {
           .subscribe(ok => {
             if (ok === true) {
               this.cargarPreguntas()
-              Swal.fire('Pregunta eliminado correctamente', pregunta.pregunta, 'success')
+              Swal.fire('Pregunta eliminada correctamente', pregunta.pregunta, 'success')
             } else {
               Swal.fire('Error', ok, 'error')
             }

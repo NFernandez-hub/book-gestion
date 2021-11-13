@@ -3,7 +3,7 @@ import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Cupon } from './cupon.interface';
 import { catchError, map } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,13 @@ export class CuponService {
 
   getCupones(){
     return this.http.get<Cupon[]>(`${this.baseUrl}/cupones/`, this.headers)
+  }
+
+  getCuponesBuscador (tipoDeBusqueda: string, termino: string){
+    return this.http.get<Cupon[]>(`${this.baseUrl}/buscar/cupones/${tipoDeBusqueda}/${termino}`)
+    .pipe(
+      catchError(err => of(err.error))
+    )
   }
 
   nuevoCupon(cupon: Cupon){
