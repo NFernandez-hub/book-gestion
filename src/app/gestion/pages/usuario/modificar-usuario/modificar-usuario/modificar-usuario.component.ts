@@ -121,11 +121,7 @@ export class ModificarUsuarioComponent implements OnInit {
   }
 
   guardar() {
-    if (this.usuario.password === undefined) {
-
-      Swal.fire('Error', 'Por favor ingrese su contraseña', 'error')
-
-    } else if (this.usuario.nombre.trim().length === 0 || this.usuario.password.trim().length === 0 || this.usuario.email.trim().length === 0
+    if (this.usuario.nombre.trim().length === 0 || this.usuario.password.trim().length === 0 || this.usuario.email.trim().length === 0
       || this.usuario.localidad.trim().length === 0 || this.usuario.provincia.trim().length === 0 || this.usuario.direccion.trim().length === 0) {
       Swal.fire('Error', 'Campos obligatorios vacios', 'error')
     } else {

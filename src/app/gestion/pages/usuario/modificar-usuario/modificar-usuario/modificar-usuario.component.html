@@ -27,15 +27,6 @@
                         type="email"
                         [(ngModel)]="usuario.email"
                         required>
-            </mat-form-field>            
-        
-        
-            <mat-form-field >
-                <mat-label>Contraseña</mat-label>
-                <input matInput
-                        type="password"
-                        [(ngModel)]="usuario.password"
-                        required>
             </mat-form-field>
 
             <mat-form-field>
@@ -66,22 +57,7 @@
                         [(ngModel)]="usuario.localidad"
                         required>
             </mat-form-field>
-            <div fxLayout="row" fxFlex="100%" fxLayoutGap="40px">
-                <mat-form-field fxFlex="50">
-                    <mat-label>Codigo Postal</mat-label>
-                    <input matInput
-                            type="number"
-                            [(ngModel)]="usuario.codigoPostal"
-                            required>
-                </mat-form-field>
-                <mat-form-field fxFlex="50">
-                    <mat-label>Celular</mat-label>
-                    <input matInput
-                            type="number"
-                            [(ngModel)]="usuario.celular"
-                            required>
-                </mat-form-field>
-            </div>
+
             <mat-form-field>
                 <mat-label>Direccion</mat-label>
                 <input matInput
@@ -89,6 +65,23 @@
                         [(ngModel)]="usuario.direccion"
                         required>
             </mat-form-field>
+
+            
+                <mat-form-field >
+                    <mat-label>Codigo Postal</mat-label>
+                    <input matInput
+                            type="number"
+                            [(ngModel)]="usuario.codigoPostal"
+                            required>
+                </mat-form-field>
+                <mat-form-field >
+                    <mat-label>Celular</mat-label>
+                    <input matInput
+                            type="number"
+                            [(ngModel)]="usuario.celular"
+                            required>
+                </mat-form-field>
+           
 
             <br>
 
