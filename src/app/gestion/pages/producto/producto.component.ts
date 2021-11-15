@@ -65,8 +65,6 @@ export class ProductoComponent implements OnInit {
         Swal.fire('Info', 'Debe ingresar un termino de busqueda', 'info')
   
       } else {
-  
-        console.log(this.tipoDeBuscada)
         this.productoService.getProductosBuscador(this.tipoDeBuscada, this.termino.trim())
           .subscribe(productos => {
             console.log(productos)

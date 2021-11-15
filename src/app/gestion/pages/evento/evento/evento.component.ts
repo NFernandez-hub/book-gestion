@@ -58,23 +58,21 @@ export class EventoComponent implements OnInit {
   }
 
   buscando() {
+
     if (this.termino.trim() === '') {
       this.cargarEventos()
     } else {
       if (!this.tipoDeBuscada) {
 
         Swal.fire('Info', 'Debe ingresar un tipo de busqueda', 'info')
-
+  
       } else if (this.termino.trim() === '') {
-
+  
         Swal.fire('Info', 'Debe ingresar un termino de busqueda', 'info')
-
+  
       } else {
-
-        console.log(this.tipoDeBuscada)
         this.eventoService.getEventosBuscador(this.tipoDeBuscada, this.termino.trim())
           .subscribe(eventos => {
-            console.log(eventos)
             if (eventos.ok === false || eventos.length === 0) {
               Swal.fire('Error', `No se encontraron resultados con el termino: ${this.termino}`, 'error')
             } else {

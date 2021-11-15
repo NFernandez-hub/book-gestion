@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Usuario, AuthResponceRenew } from '../interface/interfaces';
+import { Usuario, AuthResponceRenew, usuarioLogin } from '../interface/interfaces';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +25,15 @@ export class AuthService {
     const url = `${this.baseUrl}/auth/login`;
     const body = { email, password }
 
-    return this.http.post<AuthResponceRenew>(url, body)
+    return this.http.post<usuarioLogin>(url, body)
       .pipe(
         tap(resp => {
           if (resp.ok) {
-            this.setToken(resp)
+            if (resp.usuario.rol == "ADMIN_ROLE") {
+              localStorage.setItem('token', resp.token!)
+            } else {
+              Swal.fire('Error', 'El usuario ingresado no es administrador', 'error')
+            }
           }
         }),
         map(resp => resp.ok),
