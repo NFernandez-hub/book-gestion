@@ -10,22 +10,22 @@
 
                 <mat-form-field>
                     <mat-label>N°</mat-label>
-                    <input matInput type="text" [ngModel]="comprobante.numero" required disabled>
+                    <input matInput type="text" [ngModel]="comprobante?.numero" required disabled>
                 </mat-form-field>
 
                 <mat-form-field>
                     <mat-label>Fecha</mat-label>
-                    <input matInput type="text" [ngModel]="comprobante.fecha | date:'medium'" required disabled>
+                    <input matInput type="text" [ngModel]="comprobante?.fecha | date:'medium'" required disabled>
                 </mat-form-field>
 
                 <mat-form-field>
                     <mat-label>Cupon</mat-label>
-                    <input matInput type="text" [ngModel]="comprobante.cupon.nombre | titlecase" required disabled>
+                    <input matInput type="text" [ngModel]="comprobante?.cupon?.nombre | titlecase" required disabled>
                 </mat-form-field>
 
                 <mat-form-field>
                     <mat-label>Cliente</mat-label>
-                    <input matInput type="text" [ngModel]="comprobante.usuario.nombre | titlecase" required disabled>
+                    <input matInput type="text" [ngModel]="comprobante?.usuario?.nombre | titlecase" required disabled>
                 </mat-form-field>
                 
                 <div style="margin-bottom: 20px;">
@@ -65,17 +65,17 @@
 
                 <mat-form-field>
                     <mat-label>SubTotal</mat-label>
-                    <input matInput type="text" [ngModel]="comprobante.subTotal | currency" required disabled>
+                    <input matInput type="text" [ngModel]="comprobante?.subTotal | currency" required disabled>
                 </mat-form-field>
 
                 <mat-form-field>
                     <mat-label>Descuento</mat-label>
-                    <input matInput type="text" [ngModel]="comprobante.descuento | currency" required disabled>
+                    <input matInput type="text" [ngModel]="comprobante?.descuento | currency" required disabled>
                 </mat-form-field>
 
                 <mat-form-field>
                     <mat-label>Total</mat-label>
-                    <input matInput type="text" [ngModel]="comprobante.total | currency" required disabled>
+                    <input matInput type="text" [ngModel]="comprobante?.total | currency" required disabled>
                 </mat-form-field>
 
             </div>
