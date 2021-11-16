@@ -121,7 +121,7 @@ export class ModificarUsuarioComponent implements OnInit {
   }
 
   guardar() {
-    if (this.usuario.nombre.trim().length === 0 || this.usuario.password.trim().length === 0 || this.usuario.email.trim().length === 0
+    if (this.usuario.nombre.trim().length === 0 || this.usuario.email.trim().length === 0
       || this.usuario.localidad.trim().length === 0 || this.usuario.provincia.trim().length === 0 || this.usuario.direccion.trim().length === 0) {
       Swal.fire('Error', 'Campos obligatorios vacios', 'error')
     } else {
@@ -138,7 +138,7 @@ export class ModificarUsuarioComponent implements OnInit {
               Swal.fire('Usuario agregado correctamente', this.usuario.nombre, 'success')
               this.router.navigate(['/gestion/usuario'])
             } else {
-              Swal.fire('Error', 'El email ingresado no es valdio. Ej: bookshop@gmail.com', 'error')
+              Swal.fire('Error', 'El email ingresado no es valdio o ya se encuentra registrado. Ej: bookshop@gmail.com', 'error')
             }
           })
       }
